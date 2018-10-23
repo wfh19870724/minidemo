@@ -1,0 +1,10 @@
+<import src="../../template/bind-account.wxml"></import>
+<import src="../../template/login-dialog.wxml"></import>
+<template is="login-dialog" data wx:if="{{authModal}}"></template>
+<view>
+    <view class="links">
+        <view bindtap="onGuahao" class="link" url="/pages/my-order/my-order">我的挂号</view>
+        <view bindtap="onContacts" class="link" url="">家庭联系人</view>
+    </view>
+    <template is="bind-account" data="{{binding:binding,showError:showError,errorMsg:errorMsg,canSendCode:canSendCode,sendText:sendText}}"></template>
+</view>

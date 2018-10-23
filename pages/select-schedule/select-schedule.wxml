@@ -1,0 +1,61 @@
+<view class="doctor-info-wrap">
+    <image binderror="imgError" class="doctor-avatar" data-err-img="doctorInfo.doctorPhoto" mode="aspectFill" src="{{doctorInfo.doctorPhoto}}"></image>
+    <text class="doctor-name">{{doctorInfo.doctorName}}</text>
+    <text class="doctor-title">{{doctorInfo.doctorTechnicalTitle}} {{doctorInfo.doctorAcademicTitle}}</text>
+    <text class="doctor-hospital">{{doctorInfo.hospitalList[0].hospitalName}}</text>
+    <text class="doctor-order">预约量:<text>{{totalOrderCount}}</text>
+    </text>
+</view>
+<view class="sub-line g-arrow-right">
+    <text>排班信息</text>
+    <navigator class="link color-gray" url="/pages/order-rule/order-rule?hospDept={{stringifiedHospDept}}&doctorId={{doctorInfo.doctorId}}">预约规则</navigator>
+</view>
+<block wx:for="{{doctorInfo.hospitalList}}" wx:for-item="hosp" wx:key="index">
+    <block wx:for="{{hosp.deptList}}" wx:for-item="dept" wx:key="index">
+        <view bindtap="expandSchdule" class="main-line g-arrow-right {{expand[dept.deptId]?'arrow-top':''}}" data-dept="{{dept.deptId}}" data-hosp="{{hosp.hospitalId}}">
+    {{dept.deptName}}-{{hosp.hospitalName}}
+</view>
+        <view hidden="{{!expand[dept.deptId]}}">
+            <view class="sub-line" style="text-align: center;" wx:if="{{shiftData.length==0}}">暂无排班</view>
+            <view class="schedule-item" wx:for="{{shiftData}}" wx:for-item="shiftItems" wx:key="index">
+                <view class="month-item">{{shiftItems.month}}</view>
+                <view bindtap="tapSchedule" class="shift-item" data-id="{{shiftItem.shiftCaseId}}" data-name="{{dept.deptName}}" data-price="{{shiftItem.price+'元'}}" data-status="{{shiftItem.extraState}}" data-type="{{shiftItem.regTypeDesc}}" wx:for="{{shiftItems.items}}" wx:for-item="shiftItem" wx:key="index">
+                    <view class="bookDate">{{shiftItem.shiftDate}} {{shiftItem.slot}} {{shiftItem.week}} <text class="dayDistance">{{shiftItem.interval}}天后</text>
+                    </view>
+                    <view class="platform">
+                        <text>{{shiftItem.clinicName}}-[{{shiftItem.platformDesc}}]</text>
+                        <text class="price">{{shiftItem.price}}元</text>
+                    </view>
+                    <view class="btn-book {{shiftItem.extraState==1?'blue':'gray'}}">{{shiftItem.extraStateDesc}}</view>
+                </view>
+            </view>
+            <view bindtap="showAllSchedule" class="sub-line show-all color-gray" wx:if="{{isGtSix}}">
+                <text>{{isShowAllShift?'收起排班':'显示全部排班'}}</text>
+            </view>
+        </view>
+    </block>
+</block>
+<view class="sub-line show-all color-gray">
+    <text>挂号费由医院自行设定，平台不收取任何额外费用</text>
+</view>
+<view class="modal-group" hidden="{{!modalType}}">
+    <view class="add-patient" hidden="{{modalType!='perfectInfo'}}">
+        <form bindsubmit="perfectInfoSubmit">
+            <view bindtap="cancel" class="g-close"></view>
+            <view class="title">完善信息</view>
+            <view class="warning" style="{{invalid.hasError?'':'opacity:0;'}}">{{invalid.errMsg||'系统异常'}}</view>
+            <view class="line-group">
+                <view class="line">
+                    <text class="key {{invalid['name']?'error':''}}">姓名</text>
+                    <input class="value" name="name" placeholder="请输入真实的姓名"></input>
+                </view>
+                <view class="line">
+                    <text class="key {{invalid['identityNo']?'error':''}}">身份证</text>
+                    <input class="value" name="identityNo" placeholder="请输入真实的身份证号" type="idcard"></input>
+                </view>
+            </view>
+            <button class="add-btn" formType="submit">提交</button>
+        </form>
+    </view>
+</view>
+<loading hidden="{{hiddenLoading}}">加载排班中</loading>

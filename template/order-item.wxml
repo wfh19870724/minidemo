@@ -1,0 +1,30 @@
+<template name="order-item">
+    <view class="order-item">
+        <view class="top">
+            <text class="time">{{clinicDate}} <text wx:if="{{timeType===1}}">上午</text>
+                <text wx:if="{{timeType===2}}">下午</text>
+                <text wx:if="{{timeType===3}}">晚上</text>
+                <text wx:if="{{timeType===4}}">全天</text>
+            </text>
+            <text class="state g-color-orange">{{orderStatus}}</text>
+        </view>
+        <view bindtap="toDetail" class="content clearfix" data-orderno="{{orderNo}}" data-state="{{orderStatus}}">
+            <image binderror="imgError" class="g-doctor-avatar" data-err-img="orderList[{{index}}].expertPhoto" mode="aspectFill" src="{{expertPhoto}}"></image>
+            <view class="g-doctor-info-con">
+                <view>
+                    <text class="g-title-size g-margin-right">{{expertName}}</text>
+                    <text class="g-small-size">{{hospDeptName}}</text>
+                </view>
+                <view class="g-con-line g-middle-size">{{hospitalName}}</view>
+                <view class="g-con-line g-small-size g-color-light">
+                    就诊人：{{name}}
+                </view>
+            </view>
+            <view class="g-hospital-distance g-color-light g-small-size">{{clinicFee}}元</view>
+        </view>
+        <view class="operate" wx:if="{{orderStatus=='待支付'||orderStatus=='待评价'}}">
+            <button bindtap="tocomment" class="operate-btn" data-diseasename="{{diseaseName}}" data-orderno="{{orderNo}}" data-visit="{{visitTypeDescs}}" size="default" wx:if="{{orderStatus=='待评价'}}">去评价</button>
+            <button bindtap="topay" class="operate-btn orange" data-orderno="{{orderNo}}" size="default" wx:if="{{orderStatus=='待支付'}}">立即支付</button>
+        </view>
+    </view>
+</template>

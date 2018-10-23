@@ -1,0 +1,16 @@
+<block wx:for="{{hospDept}}" wx:for-item="hosp" wx:key="index">
+    <block wx:for="{{hosp.deptList}}" wx:for-item="dept" wx:key="index">
+        <view bindtap="expandRule" class="title dept g-arrow-right {{expand[dept.deptId]?'arrow-top':''}}" data-dept="{{dept.deptId}}" data-hosp="{{hosp.hospitalId}}">{{dept.deptName}}-{{hosp.hospitalName}}</view>
+        <view class="title" wx:if="{{expand[dept.deptId]&&ruleitems.length==0}}">暂无规则</view>
+        <block wx:if="{{expand[dept.deptId]}}" wx:for="{{ruleitems}}" wx:key="index">
+            <view class="title type">{{item.platformDesc}}预约规则<text class="time">({{item.reserveOpentime}})</text>
+            </view>
+            <view class="title" wx:if="{{item.hospitalRule}}">医院规则</view>
+            <text class="rule" wx:if="{{item.hospitalRule}}">{{item.hospitalRule}}</text>
+            <view class="title" wx:if="{{item.departmentRule}}">科室规则</view>
+            <text class="rule" wx:if="{{item.departmentRule}}">{{item.departmentRule}}</text>
+            <view class="title" wx:if="{{item.doctorRule}}">医生规则</view>
+            <text class="rule" wx:if="{{item.doctorRule}}">{{item.doctorRule}}</text>
+        </block>
+    </block>
+</block>

@@ -1,0 +1,45 @@
+page {
+    height: 100%;
+}
+
+.body {
+    padding-top: 140rpx;
+    text-align: center;
+    background-color: #fff;
+    height: 100%;
+}
+
+.fail {
+    text-align: center;
+    background-color: #fff;
+    height: 100%;
+}
+
+.pill {
+    width: 280rpx;
+    height: 280rpx;
+}
+
+.message {
+    margin: 20rpx 0 15rpx 0;
+    font-size: 30rpx;
+}
+
+.info {
+    color: #666;
+    line-height: 40rpx;
+}
+
+.wy-btn {
+    margin-top: 35rpx;
+}
+
+.timeout {
+    height: 60rpx;
+    background-color: #fe3824;
+    color: #fff;
+    text-align: center;
+    line-height: 60rpx;
+    font-size: 24rpx;
+    margin-bottom: 140rpx;
+}

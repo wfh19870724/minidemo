@@ -1,0 +1,21 @@
+@import "../../__wuBaseWxss__/1.wxss";
+
+.links {
+    margin-top: 30rpx;
+    background-color: #fff;
+    color: #666;
+    font-size: 28rpx;
+}
+
+.link {
+    height: 90rpx;
+    line-height: 90rpx;
+    margin-left: 30rpx;
+    border-top: 1rpx solid #eee;
+    background: url(/imgs/see-more.png-do-not-use-local-path-./pages/my/my.wxss&14&16) no-repeat 660rpx center;
+    background-size: 30rpx 30rpx;
+}
+
+.link:first-child {
+    border-top: 0;
+}

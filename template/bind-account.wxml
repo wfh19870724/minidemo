@@ -1,0 +1,16 @@
+<template name="bind-account">
+    <view class="mask" wx:if="{{binding}}"></view>
+    <view class="bind-account" wx:if="{{binding}}">
+        <icon bindtap="closebind" class="close-bind" color="#ddd" size="20" type="cancel"></icon>
+        <view class="error-tip" wx:if="{{showError}}">{{errorMsg}}</view>
+        <view class="tit">绑定手机号</view>
+        <view class="bind-ipt">
+            <input bindinput="mobileIpt" class="bind-mobile" focus="{{true}}" placeholder="仅支持中国大陆手机号" type="number"></input>
+        </view>
+        <view class="bind-ipt">
+            <input bindinput="codeIpt" class="bind-code" maxlength="10" placeholder="请输入验证码" type="number"></input>
+            <text bindtap="sendcode" class="send-code {{canSendCode==true?'can-send':''}}">{{sendText}}</text>
+        </view>
+        <button bindtap="bind" class="wy-btn" size="default">确定</button>
+    </view>
+</template>

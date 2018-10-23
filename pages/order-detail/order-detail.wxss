@@ -1,0 +1,70 @@
+.state {
+    height: 60rpx;
+    color: #666;
+    text-align: center;
+    line-height: 60rpx;
+    font-size: 24rpx;
+}
+
+.operate-warp {
+    height: 100rpx;
+}
+
+.operate {
+    height: 100rpx;
+    line-height: 100rpx;
+    background-color: #3f86ff;
+    color: #fff;
+    text-align: center;
+    width: 750rpx;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+.list {
+    padding: 20rpx;
+    background-color: #fff;
+    font-size: 28rpx;
+    line-height: 50rpx;
+    border-bottom: 1rpx solid #eee;
+}
+
+.tit {
+    width: 175rpx;
+    display: inline-block;
+    color: #666;
+    vertical-align: top;
+}
+
+.con {
+    width: 535rpx;
+    display: inline-block;
+    color: #333;
+    vertical-align: top;
+}
+
+.orange {
+    color: #ff7e3b;
+}
+
+.info {
+    padding: 20rpx;
+    background-color: #fff;
+    line-height: 38rpx;
+    border-top: 1rpx solid #eee;
+    border-bottom: 1rpx solid #eee;
+    margin-top: 15rpx;
+}
+
+.cancel {
+    height: 100rpx;
+    line-height: 100rpx;
+    background-color: #fff;
+    color: red;
+    text-align: center;
+    width: 750rpx;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}

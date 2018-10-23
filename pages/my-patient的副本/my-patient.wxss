@@ -1,0 +1,276 @@
+.patient {
+    background: #fff;
+}
+
+.patient-list {
+    background: rgb(248,248,248);
+    position: absolute;
+    bottom: 100rpx;
+    top: 60rpx;
+}
+
+.chose-patient .title {
+    text-align: center;
+    line-height: 60rpx;
+}
+
+.chose-patient .sub-title {
+    text-align: center;
+    color: rgb(168,168,168);
+    font-size: 24rpx;
+    line-height: 60rpx;
+    background: rgb(248,248,248);
+}
+
+.patient {
+    padding: 25rpx;
+    border-top: 1rpx solid rgb(247,247,247);
+    position: relative;
+}
+
+.patient.active {
+    color: #fff;
+    background: rgb(103,119,145);
+}
+
+.patient:last-child {
+    border-bottom: 1rpx solid rgb(247,247,247);
+}
+
+.block {
+    display: block;
+}
+
+.patient text {
+    line-height: 50rpx;
+    margin-right: 20rpx;
+}
+
+.patient.inline text {
+    display: inline-block;
+}
+
+.patient .name {
+    font-size: 32rpx;
+}
+
+.add-btn {
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    font-size: 28rpx;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: rgb(48,121,255);
+    border-top: 1rpx solid rgb(238,238,238);
+    z-index: 1;
+}
+
+.modal-group {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+.content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgb(248,248,248);
+}
+
+.add-patient.edit {
+    height: 550rpx;
+}
+
+.add-patient .title {
+    text-align: center;
+    line-height: 60rpx;
+}
+
+.add-patient .warning {
+    background: rgb(244,56,37);
+    line-height: 60rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #fff;
+}
+
+.add-patient .line {
+    line-height: 100rpx;
+    border-top: 1rpx solid rgb(247,247,247);
+    padding-left: 25rpx;
+}
+
+.add-patient .line:last-child {
+    border-bottom: 1rpx solid rgb(247,247,247);
+}
+
+.add-patient .line .value {
+    float: right;
+    height: 100rpx;
+    line-height: 100rpx;
+    width: 550rpx;
+    color: rgb(128,128,128);
+}
+
+.add-patient .switch {
+    float: right;
+    margin-right: 20rpx;
+}
+
+.error {
+    color: rgb(244,0,0)!important;
+}
+
+.sex label {
+    width: 130rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    display: inline-block;
+    text-align: center;
+    border: 1rpx solid rgb(238,238,238);
+    margin-right: 20rpx;
+    border-radius: 40rpx;
+    color: rgb(128,128,128);
+}
+
+.sex radio {
+    display: none;
+    opacity: 0;
+}
+
+.sex label.active {
+    color: rgb(92,145,255);
+    border-color: rgb(92,145,255);
+}
+
+.valid-code {
+    width: 560rpx;
+    height: 360rpx;
+    background: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -280rpx;
+    margin-top: -180rpx;
+    border-radius: 30rpx;
+    padding-top: 30rpx;
+}
+
+.valid-code .title {
+    line-height: 60rpx;
+    text-align: center;
+}
+
+.valid-code .warning {
+    background: rgb(244,56,37);
+    line-height: 50rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #fff;
+}
+
+.valid-code .phone {
+    line-height: 75rpx;
+    padding: 0 0 0 40rpx;
+    margin-top: 10rpx;
+}
+
+.valid-code .resend {
+    display: inline-block;
+    margin-left: 30rpx;
+    width: 150rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    border: 1rpx solid rgb(219,219,219);
+    border-radius: 40rpx;
+    text-align: center;
+    color: rgb(102,102,102);
+}
+
+.valid-code .code-group {
+    overflow: hidden;
+    border: 1rpx solid rgb(219,219,219);
+    width: 481rpx;
+    margin: 30rpx auto 0 auto;
+    display: flex;
+    border-radius: 6rpx;
+}
+
+.valid-code .code {
+    flex: 1;
+    line-height: 80rpx;
+    height: 80rpx;
+    float: left;
+    border-right: 1rpx solid rgb(219,219,219);
+    text-align: center;
+}
+
+.valid-code .code:last-child {
+    border-right: none;
+}
+
+.hidden-input {
+    position: absolute;
+    width: 480rpx;
+    left: 36rpx;
+    bottom: 58rpx;
+    height: 80rpx;
+    opacity: 0;
+}
+
+.line {
+    line-height: 50rpx;
+}
+
+.line .key {
+    color: rgb(102,102,102);
+    padding-right: 65rpx;
+}
+
+.add-patient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 20rpx 20rpx 0 0;
+    padding-top: 25rpx;
+    height: 850rpx;
+}
+
+.delete,.add {
+    flex: 1;
+    height: 80rpx;
+    line-height: 80rpx;
+    margin: 25rpx;
+    font-size: 28rpx;
+    border-radius: 50rpx;
+    text-align: center;
+    padding: 0;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-around;
+}
+
+.delete {
+    background: #fff;
+    color: rgb(244,38,0);
+    border: 1rpx solid rgb(219,219,219);
+}
+
+.add {
+    background: rgb(63,134,255);
+    color: #fff;
+}

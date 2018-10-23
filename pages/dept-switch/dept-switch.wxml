@@ -1,0 +1,12 @@
+<view class="body">
+    <scroll-view class="province g-hidden-scrollbar" scrollY="true">
+        <view bindtap="chooseDept" class="province-item {{selectIndex==idx?'province-item-select':''}}" data-index="{{idx}}" wx:for="{{deptList}}" wx:for-index="idx" wx:key="idx">
+        {{item.name}}
+        </view>
+    </scroll-view>
+    <view class="city g-hidden-scrollbar">
+        <view bindtap="chooseChildDept" class="city-item" data-id="{{item.deptId}}" data-name="{{item.deptName}}" wx:for="{{childDeptList}}" wx:for-index="idx" wx:key="idx">
+        {{item.deptName}}
+        </view>
+    </view>
+</view>

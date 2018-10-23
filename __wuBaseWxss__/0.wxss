@@ -1,0 +1,15 @@
+.g-noresult {
+    text-align: center;
+    padding-top: 180rpx;
+}
+
+.g-noresult--img {
+    width: 280rpx;
+    height: 280rpx;
+}
+
+.g-noresult--message {
+    margin: 20rpx 0 34rpx 0;
+    font-size: 30rpx;
+    color: #999;
+}

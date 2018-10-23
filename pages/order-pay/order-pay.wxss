@@ -1,0 +1,62 @@
+.timeout {
+    height: 60rpx;
+    background-color: #fe3824;
+    color: #fff;
+    text-align: center;
+    line-height: 60rpx;
+    font-size: 24rpx;
+}
+
+.pay-warp {
+    height: 100rpx;
+}
+
+.pay {
+    height: 100rpx;
+    line-height: 100rpx;
+    background-color: #3f86ff;
+    color: #fff;
+    text-align: center;
+    width: 750rpx;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+.timeouted {
+    height: 100rpx;
+    line-height: 100rpx;
+    background-color: #dedede;
+    color: #999;
+    text-align: center;
+    width: 750rpx;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+
+.list {
+    padding: 20rpx;
+    background-color: #fff;
+    font-size: 28rpx;
+    line-height: 50rpx;
+    border-bottom: 1rpx solid #eee;
+}
+
+.tit {
+    width: 175rpx;
+    display: inline-block;
+    color: #666;
+    vertical-align: top;
+}
+
+.con {
+    width: 535rpx;
+    display: inline-block;
+    color: #333;
+    vertical-align: top;
+}
+
+.orange {
+    color: #ff7e3b;
+}

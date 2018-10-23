@@ -1,0 +1,24 @@
+<template name="doctor-item">
+    <view bindtap="jumpOrderByDoctor" class="g-scroll-view-item" data-count="{{totalOrderCount}}" data-departmentid="{{departmentId}}" data-hospitalid="{{hospitalId}}" data-id="{{doctorId}}">
+        <image binderror="imgError" class="g-doctor-avatar" data-err-img="doctorList[{{index}}].doctorPhoto" mode="aspectFill" src="{{doctorPhoto}}"></image>
+        <view class="g-doctor-info-con">
+            <view>
+                <text class="g-title-size g-margin-right">{{doctorName}}</text>
+                <text class="g-small-size">{{doctorTechnicalTitle}}</text>
+            </view>
+            <view class="g-con-line g-middle-size">{{hospitalDep}}</view>
+            <view class="g-con-line g-small-size">
+                <view class="g-star {{score=='0'?'gray':''}}"></view>
+                <view class="g-color-light g-score g-margin-right" hidden="{{noScore?false:true}}">暂无</view>
+                <view class="g-color-orange g-score g-margin-right" hidden="{{noScore?true:false}}">
+                    <text class="g-score-left">{{scoreLeft}}</text>
+                    <text>.</text>
+                    <text class="">{{scoreRight}}</text>
+                </view>
+                <text class="g-color-light">预约量 {{totalOrderCount}}</text>
+            </view>
+            <view class="g-con-line g-color-light g-feature g-small-size" hidden="{{feature?false:true}}">擅长：{{feature}}</view>
+        </view>
+        <view class="g-button" data-count="{{totalOrderCount}}" data-id="{{doctorId}}">预约</view>
+    </view>
+</template>

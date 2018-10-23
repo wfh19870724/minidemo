@@ -1,0 +1,65 @@
+<view class="chose-patient">
+    <view class="sub-title" wx:if="{{formDataGroup.patient.patientLimit.lave>0}}">已添加{{formDataGroup.patient.patientLimit.number}}人，还能添加{{formDataGroup.patient.patientLimit.lave}}人</view>
+    <view class="sub-title" wx:if="{{formDataGroup.patient.patientLimit.lave==0}}">已添加{{formDataGroup.patient.patientLimit.number}}人，无法继续添加</view>
+    <scroll-view class="patient-list" scrollY="true">
+        <view bindtap="editPatient" class="patient" data-index="{{index}}" hover="true" hoverClass="active" wx:for="{{formDataGroup.patient.patientList}}" wx:key="index">
+            <text class="gray">
+                <text class="name">{{item.name}}</text>
+                <text>{{item.sex==1?'男':'女'}}</text>
+                <text>{{item.age}}岁</text>
+                <text>{{item.isDefault?'[默认]':''}}</text>
+            </text>
+            <text class="block">{{item.mobile||'手机号未填写'}}</text>
+            <text class="block">{{item.cardNo||'身份证未填写'}}</text>
+        </view>
+    </scroll-view>
+    <view bindtap="addPatient" class="add-btn" wx:if="{{formDataGroup.patient.patientLimit.lave>0}}">添加就诊人</view>
+</view>
+<view class="modal-group" hidden="{{!modalType}}">
+    <view class="add-patient" hidden="{{modalType!='add_patient'&&modalType!='edit_patient'}}">
+        <form bindsubmit="patientAddFormSubmit">
+            <view bindtap="cancel" class="g-close"></view>
+            <view class="title">{{modalType=='edit_patient'?'编辑就诊人':'添加就诊人'}}</view>
+            <view class="warning" style="{{invalid.hasError?'':'opacity:0;'}}">请输入正确的就诊人信息</view>
+            <view class="line-group">
+                <view class="line">
+                    <text class="key {{invalid['name']?'error':''}}">姓名</text>
+                    <input class="value" name="name" placeholder="请输入真实的姓名" value="{{patientData.name}}"></input>
+                </view>
+                <view class="line">
+                    <text class="key {{invalid['cardNo']?'error':''}}">身份证</text>
+                    <input class="value" disabled="{{modalType=='edit_patient'&&(patientData.realNameStatus==1||patientData.realNameStatus==3)}}" name="cardNo" placeholder="请输入真实的身份证号" type="idcard" value="{{patientData.cardNo}}"></input>
+                </view>
+                <view class="line">
+                    <text class="key">性别</text>
+                    <view class="value sex">
+                        <radio-group bindchange="setSex" name="sex">
+                            <label class="{{patientData.sex==1?'active':''}}">男<radio checked="{{patientData.sex==1}}" value="1"></radio>
+                            </label>
+                            <label class="{{patientData.sex==2?'active':''}}">女<radio checked="{{patientData.sex==2}}" value="2"></radio>
+                            </label>
+                        </radio-group>
+                    </view>
+                </view>
+                <view class="line">
+                    <text class="key">年龄</text>
+                    <picker bindchange="setAge" class="value" end="{{endDate}}" mode="date" start="1900-01" value="{{date}}">
+                        <text class="value">{{patientData.age||'请选择年龄'}}</text>
+                    </picker>
+                </view>
+                <view class="line">
+                    <text class="key {{invalid['mobile']?'error':''}}">手机号</text>
+                    <input class="value" name="mobile" placeholder="便于接受预约短信，请谨慎填写" type="number" value="{{patientData.mobile}}"></input>
+                </view>
+                <view class="line">
+                    <text class="key">设为默认</text>
+                    <switch checked="{{patientData.isDefault}}" class="switch" name="isDefault" type="switch"></switch>
+                </view>
+            </view>
+            <view class="flex">
+                <view bindtap="deletePatient" class="delete" hidden="{{modalType=='add_patient'}}">删除</view>
+                <button class="add" formType="submit">保存</button>
+            </view>
+        </form>
+    </view>
+</view>

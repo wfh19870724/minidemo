@@ -1,0 +1,8 @@
+@import "../../../__wuBaseWxss__/0.wxss";
+
+.consult {
+    margin-top: 16rpx;
+    background: #fff;
+    border-top: 2rpx solid #eee;
+    border-bottom: 2rpx solid #eee;
+}

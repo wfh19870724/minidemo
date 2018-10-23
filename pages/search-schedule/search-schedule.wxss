@@ -1,0 +1,183 @@
+@import "../../__wuBaseWxss__/1.wxss";
+
+page {
+    background: #fff;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    line-height: 90rpx;
+    font-size: 28rpx;
+    box-sizing: border-box;
+    border-top: 1rpx solid rgb(242,242,242);
+    border-bottom: 1rpx solid rgb(242,242,242);
+    background: #fff;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 2;
+}
+
+.tab {
+    width: 190rpx;
+    text-align: center;
+}
+
+.tab.active {
+    border-bottom: 6rpx solid rgb(63,134,255);
+    color: rgb(63,134,255);
+    box-sizing: border-box;
+}
+
+.pt90 {
+    padding-top: 90rpx;
+}
+
+.date-list {
+    background: #fff;
+    width: 750rpx;
+    overflow: hidden;
+    border-bottom: 1rpx solid rgb(242,242,242);
+    white-space: nowrap;
+    height: 100rpx;
+}
+
+.date {
+    width: 100rpx;
+    height: 100rpx;
+    display: inline-block;
+    padding: 20rpx 0;
+    border-right: 1rpx solid rgb(242,242,242);
+    box-sizing: border-box;
+}
+
+.date text {
+    display: block;
+    text-align: center;
+    font-size: 24rpx;
+    line-height: 30rpx;
+    color: rgb(101,101,101);
+}
+
+.date.active {
+    background: rgb(63,134,255);
+    border: none;
+}
+
+.date.active text {
+    color: #fff;
+}
+
+.g-button {
+    position: absolute;
+    right: 20rpx;
+    top: 30rpx;
+}
+
+.g-button.gray {
+    background: #ccc;
+}
+
+.clear-history {
+    line-height: 100rpx;
+    border-top: 1rpx solid #eee;
+    padding: 0 40rpx;
+    text-align: center;
+    color: #333;
+    font-size: 36rpx;
+}
+
+.clear-history .g-empty-img {
+    margin: 100rpx auto 0 auto;
+    display: block;
+}
+
+.modal-group {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+.content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgb(248,248,248);
+}
+
+.add-patient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 800rpx;
+    background: #fff;
+    border-radius: 20rpx 20rpx 0 0;
+    padding-top: 25rpx;
+}
+
+.add-btn {
+    width: 700rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    margin: 20rpx auto;
+    text-align: center;
+    color: #fff;
+    background: rgb(63,134,255);
+    border-radius: 50rpx;
+    font-size: 28rpx;
+}
+
+.add-patient {
+    height: 850rpx;
+}
+
+.add-patient.edit {
+    height: 550rpx;
+}
+
+.add-patient .title {
+    text-align: center;
+    line-height: 60rpx;
+}
+
+.add-patient .warning {
+    background: rgb(244,56,37);
+    line-height: 60rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #fff;
+}
+
+.add-patient .line {
+    line-height: 100rpx;
+    border-top: 1rpx solid rgb(247,247,247);
+    padding-left: 25rpx;
+}
+
+.add-patient .line:last-child {
+    border-bottom: 1rpx solid rgb(247,247,247);
+}
+
+.add-patient .line .value {
+    float: right;
+    height: 100rpx;
+    line-height: 100rpx;
+    width: 550rpx;
+    color: rgb(128,128,128);
+}
+
+.add-patient .switch {
+    float: right;
+    margin-right: 20rpx;
+}
+
+.error {
+    color: rgb(244,0,0)!important;
+}

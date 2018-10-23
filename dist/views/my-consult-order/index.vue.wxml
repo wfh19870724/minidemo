@@ -1,0 +1,29 @@
+<template name="3ce68096">
+    <view class="_div data-v-56e8316e consult-order">
+        <view class="_div data-v-56e8316e consult-order--item" key="{{index}}" wx:for="{{orderList}}" wx:key="index">
+            <view class="_div data-v-56e8316e consult-order--item-hd">
+                <view class="_div data-v-56e8316e avatar">
+                    <image class="_img data-v-56e8316e" src="{{item.doctorHeadPhoto}}"></image>
+                </view>
+                <view class="_div data-v-56e8316e info">
+                    <label class="_span data-v-56e8316e name">全科医生</label>
+                </view>
+                <view class="_div data-v-56e8316e status {{[item.orderStatus===2?'finish':'']}}"> {{item.orderStatusDesc}} </view>
+            </view>
+            <view class="_div data-v-56e8316e consult-order--item-bd">{{item.content}}</view>
+            <view class="_div data-v-56e8316e consult-order--item-ft">
+                <view class="_div data-v-56e8316e left">
+                    <label class="_span data-v-56e8316e date">{{item.orderTime}}</label>
+                    <label class="_span data-v-56e8316e type">{{item.consultTypeDesc}}</label>
+                </view>
+                <view class="_div data-v-56e8316e right">
+                    <view url class="_a data-v-56e8316e comment-btn">去评价</view>
+                </view>
+            </view>
+        </view>
+        <template is="21b428e6" data="{{...$root[$kk+'0'],$root:$root}}"></template>
+        <template is="124d110a" data="{{...$root[$kk+'1'],$root:$root}}"></template>
+    </view>
+</template>
+<import src="/components/g-loading/index.vue.wxml"></import>
+<import src="/components/g-noresult/index.vue.wxml"></import>

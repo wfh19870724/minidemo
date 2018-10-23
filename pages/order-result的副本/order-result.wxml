@@ -1,0 +1,25 @@
+<view class="body" wx:if="{{orderState==1}}">
+    <image class="pill" mode="aspectFit" src="/imgs/pill-success.png"></image>
+    <view class="message">预约成功</view>
+    <view class="info">{{item.clinicDate}}  {{item.clinicTime}}</view>
+    <view class="info">{{item.hospitalName}}</view>
+    <view class="info">{{item.hospDeptName}} {{item.expertName}}</view>
+    <view>
+        <button bindtap="checkOrder" class="wy-btn" size="default"> 查看预约单 </button>
+    </view>
+</view>
+<view class="fail" wx:if="{{orderState==2}}">
+    <view class="timeout">支付金额将在48小时内退还至您的账户</view>
+    <image class="pill" mode="aspectFit" src="/imgs/pill-fail.png"></image>
+    <view class="message">{{message}}</view>
+    <view>
+        <button bindtap="backHome" class="wy-btn" size="default"> 重新预约 </button>
+    </view>
+</view>
+<view class="body" wx:if="{{orderState==3}}">
+    <image class="pill" mode="aspectFit" src="/imgs/pill-fail.png"></image>
+    <view class="message">{{message}}</view>
+    <view>
+        <button bindtap="backHome" class="wy-btn" size="default"> 重新预约 </button>
+    </view>
+</view>

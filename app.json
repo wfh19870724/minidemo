@@ -1,0 +1,53 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/order-rule/order-rule",
+        "pages/order-rule2/order-rule2",
+        "pages/order-info/order-info",
+        "pages/address-switch/address-switch",
+        "pages/search-schedule/search-schedule",
+        "pages/order-pay/order-pay",
+        "pages/pay-result/pay-result",
+        "pages/order-result/order-result",
+        "pages/my/my",
+        "pages/my-order/my-order",
+        "pages/order-detail/order-detail",
+        "pages/my-patient/my-patient",
+        "pages/select-schedule/select-schedule",
+        "pages/dept-switch/dept-switch",
+        "pages/unvisit/unvisit",
+        "pages/share-comment/share-comment",
+        "pages/webview/webview",
+        "pages/news/news/news",
+        "pages/news/news2/news2",
+        "pages/news/detail/detail"
+
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "挂号平台demo",
+        "navigationBarTextStyle": "black"
+    },
+    "tabBar": {
+        "color": "#666666",
+        "selectedColor": "#3F86FF",
+        "backgroundColor": "#fff",
+        "borderStyle": "white",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "挂号",
+                "iconPath": "imgs/tabbar-guahao.png",
+                "selectedIconPath": "imgs/tabbar-guahao-on.png"
+            },
+            {
+                "pagePath": "pages/my/my",
+                "text": "我",
+                "iconPath": "imgs/tabbar-me.png",
+                "selectedIconPath": "imgs/tabbar-me-on.png"
+            }
+        ]
+    },
+    "debug": true
+}

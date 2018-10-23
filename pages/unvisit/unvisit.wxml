@@ -1,0 +1,16 @@
+<view>
+    <form bindreset="formReset" bindsubmit="formSubmit">
+        <radio-group bindchange="radioChange" class="radio-group">
+            <label class="radio clearfix" wx:for="{{items}}" wx:key="item.name">
+                <view class="radio-text">{{item.value}}</view>
+                <radio checked="{{item.checked}}" class="radio-check" name="reason" value="{{item.name}}"></radio>
+            </label>
+        </radio-group>
+        <textarea class="textarea" name="textreason" placeholder="请输入您未就诊的原因"></textarea>
+        <view class="tip">·根据规定，如爽约达到3次，您将在一个月内无法使用预约挂号和咨询的功能。</view>
+        <view class="tip">·请珍惜每一次就医机会，如因故无法及时就医，请提前取消订单的操作，或者直接联系我们的客服人员。</view>
+        <view class="operate-warp">
+            <button class="submit-btn" formType="submit">提交</button>
+        </view>
+    </form>
+</view>

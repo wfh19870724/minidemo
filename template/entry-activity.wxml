@@ -1,0 +1,7 @@
+<template name="entry-activity">
+    <movable-view class="body-movable-view" direction="{{direction}}" outOfBounds="true" x="{{x}}" y="{{y}}">
+        <navigator class="body-movable-img" hoverClass="none" url="{{url}}">
+            <image backgroundSize="cover" class="body-movable-img" src="{{icon}}"></image>
+        </navigator>
+    </movable-view>
+</template>

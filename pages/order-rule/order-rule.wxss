@@ -1,0 +1,36 @@
+page {
+    background: #fff;
+}
+
+.title {
+    line-height: 80rpx;
+    padding-left: 25rpx;
+    color: rgb(102,102,102);
+    font-size: 28rpx;
+}
+
+.rule {
+    padding: 0 25rpx 25rpx 25rpx;
+    color: rgb(51,51,51);
+    font-size: 28rpx;
+    display: inline-block;
+}
+
+.time {
+    color: rgb(62,132,252);
+    font-size: 28rpx;
+}
+
+.dept {
+    border-top: 1rpx solid rgb(242,242,242);
+    border-bottom: 1rpx solid rgb(242,242,242);
+}
+
+.type {
+    line-height: 40rpx;
+    margin-top: 40rpx;
+}
+
+.g-arrow-right.arrow-top:after {
+    transform: rotate(-135deg);
+}

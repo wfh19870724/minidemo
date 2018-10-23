@@ -1,0 +1,2 @@
+<import src="/components/g-loading/index.vue.wxml"></import>
+<import src="/components/g-noresult/index.vue.wxml"></import>

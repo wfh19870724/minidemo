@@ -1,0 +1,14 @@
+<import src="../../template/order-item.wxml"></import>
+<scroll-view bindscrolltolower="lower" bindscrolltoupper="" class="scroll-vew" scrollY="true">
+    <template is="order-item" data="{{...item,index:index}}" wx:for="{{orderList}}"></template>
+    <view class="g-loading" wx:if="{{loading}}">
+        <view class="g-dot"></view>
+        <view class="g-dot"></view>
+        <view class="g-dot"></view>
+        <view class="g-dot"></view>
+    </view>
+    <view class="empty" wx:if="{{empty}}">
+        <image class="pill" mode="aspectFit" src="/imgs/pill-fail.png"></image>
+        <view class="message">还没有挂号订单，快去下单吧~</view>
+    </view>
+</scroll-view>

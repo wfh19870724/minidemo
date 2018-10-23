@@ -1,0 +1,36 @@
+page {
+    height: 100%;
+}
+
+.body {
+    padding-top: 140rpx;
+    text-align: center;
+    background-color: #fff;
+    height: 100%;
+}
+
+.fail {
+    padding-top: 140rpx;
+    text-align: center;
+    background-color: #fff;
+    height: 100%;
+}
+
+.pill {
+    width: 280rpx;
+    height: 280rpx;
+}
+
+.message {
+    margin: 20rpx 0 35rpx 0;
+    font-size: 30rpx;
+}
+
+.info {
+    color: #666;
+    line-height: 40rpx;
+}
+
+.wy-btn {
+    margin-top: 35rpx;
+}

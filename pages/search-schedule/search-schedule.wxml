@@ -1,0 +1,57 @@
+<import src="../../template/doctor-item.wxml"></import>
+<import src="../../template/bind-account.wxml"></import>
+<import src="../../template/login-dialog.wxml"></import>
+<template is="login-dialog" data wx:if="{{authModal}}"></template>
+<view class="nav">
+    <view bindtap="choseTab" class="tab {{active_tab==0?'active':''}}" data-type="0">按专家预约</view>
+    <view bindtap="choseTab" class="tab {{active_tab==1?'active':''}}" data-type="1">按日期预约</view>
+</view>
+<scroll-view class="date-list pt90" hidden="{{!dateList.length||active_tab==0}}" scrollX="true">
+    <view bindtap="choseDate" class="date {{active_date==index?'active':''}}" data-date="{{item.fullDate}}" data-index="{{index}}" wx:for="{{dateList}}" wx:key="index">
+        <text>{{item.week}}</text>
+        <text>{{item.date}}</text>
+    </view>
+</scroll-view>
+<scroll-view class="doctor-list {{active_tab==0||!dateList.length?'pt90':''}} " scrollY="true">
+    <view class="clear-history" wx:if="{{active_tab==0&&doctorList.length==0&&!doctorLoading||active_tab==1&&doctorListFilterByDate.length==0&&!scheduleLoading}}">
+        <image class="g-empty-img" src="/imgs/pill-fail.png"></image>
+近期暂无可预约的医生
+</view>
+    <template is="doctor-item" data="{{...item,index:index}}" wx:if="{{active_tab==0}}" wx:for="{{doctorList}}" wx:key="index"></template>
+    <view bindtap="jumpOrderByDate" class="g-scroll-view-item" data-id="{{item.shiftCaseId}}" data-status="{{item.doctorHaoyuanStatus}}" wx:if="{{active_tab==1}}" wx:for="{{doctorListFilterByDate}}" wx:key="index">
+        <image binderror="imgError" class="g-doctor-avatar" data-err-img="doctorListFilterByDate[{{index}}].doctorPhoto" mode="aspectFill" src="{{item.doctorPhoto}}"></image>
+        <view class="g-doctor-info-con">
+            <view>
+                <text class="g-title-size g-margin-right">{{item.doctorName}}</text>
+                <text class="g-small-size">{{item.doctorTechnicalTitle}}</text>
+            </view>
+            <view class="g-con-line g-middle-size">{{item.hospitalDep}}</view>
+            <view class="g-con-line g-color-light g-feature g-small-size" hidden="{{item.feature?false:true}}" style="width: 460rpx;">擅长：{{item.feature}}</view>
+            <view class="g-con-line g-middle-size">{{item.shiftCaseDate}} {{item.apm}} {{item.clinicType}}
+              <text style="float:right;color:rgb(245,110,0);">{{item.clinicFee}}元</text>
+            </view>
+        </view>
+        <view class="g-button {{item.doctorHaoyuanStatus!=10?'gray':''}}">{{item.doctorHaoyuanStatusDesc}}</view>
+    </view>
+</scroll-view>
+<view class="modal-group" hidden="{{!modalType}}">
+    <view class="add-patient" hidden="{{modalType!='perfectInfo'}}">
+        <form bindsubmit="perfectInfoSubmit">
+            <view bindtap="cancel" class="g-close"></view>
+            <view class="title">完善信息</view>
+            <view class="warning" style="{{invalid.hasError?'':'opacity:0;'}}">{{invalid.errMsg||'系统异常'}}</view>
+            <view class="line-group">
+                <view class="line">
+                    <text class="key {{invalid['name']?'error':''}}">姓名</text>
+                    <input class="value" name="name" placeholder="请输入真实的姓名"></input>
+                </view>
+                <view class="line">
+                    <text class="key {{invalid['identityNo']?'error':''}}">身份证</text>
+                    <input class="value" name="identityNo" placeholder="请输入真实的身份证号" type="idcard"></input>
+                </view>
+            </view>
+            <button class="add-btn" formType="submit">提交</button>
+        </form>
+    </view>
+</view>
+<template is="bind-account" data="{{binding:binding,showError:showError,errorMsg:errorMsg,canSendCode:canSendCode,sendText:sendText}}"></template>

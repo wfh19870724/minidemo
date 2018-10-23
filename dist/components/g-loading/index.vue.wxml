@@ -1,0 +1,8 @@
+<template name="21b428e6">
+    <view class="_div data-v-264cbf4e g-loading" hidden="{{!loading}}">
+        <view class="_div data-v-264cbf4e g-dot"></view>
+        <view class="_div data-v-264cbf4e g-dot"></view>
+        <view class="_div data-v-264cbf4e g-dot"></view>
+        <view class="_div data-v-264cbf4e g-dot"></view>
+    </view>
+</template>

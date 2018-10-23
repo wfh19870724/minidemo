@@ -1,0 +1,54 @@
+<view wx:if="{{!loading}}">
+    <view class="timeout" wx:if="{{!timeouted}}">剩 {{timeout}} 自动取消订单</view>
+    <view class="list">
+        <view>
+            <view class="tit">就诊医院</view>
+            <view class="con">{{item.hospitalName}}</view>
+        </view>
+        <view>
+            <view class="tit">科室医生</view>
+            <view class="con">{{item.hospDeptName}} {{item.expertName}}</view>
+        </view>
+        <view>
+            <view class="tit">门诊时间</view>
+            <view class="con orange">{{item.clinicDate}}</view>
+        </view>
+        <view>
+            <view class="tit">门诊类型</view>
+            <view class="con">{{item.clinicType}}</view>
+        </view>
+        <view>
+            <view class="tit">挂号费用</view>
+            <view class="con">{{item.clinicFee}}元</view>
+        </view>
+    </view>
+    <view class="list">
+        <view>
+            <view class="tit">患者姓名</view>
+            <view class="con">{{item.name}}</view>
+        </view>
+        <view>
+            <view class="tit">身份证号</view>
+            <view class="con">{{item.cardNo}}</view>
+        </view>
+        <view>
+            <view class="tit">手机号</view>
+            <view class="con">{{item.mobile}}</view>
+        </view>
+        <view>
+            <view class="tit">就诊类型</view>
+            <view class="con" wx:if="{{item.visitType==0}}">初诊</view>
+            <view class="con" wx:if="{{item.visitType==1}}">复诊</view>
+        </view>
+    </view>
+    <view class="pay-warp">
+        <view bindtap="pay" class="pay" wx:if="{{!timeouted}}">支付 {{item.clinicFee}} 元</view>
+        <view class="timeouted" wx:if="{{timeouted}}">已取消</view>
+    </view>
+</view>
+<view class="g-loading" wx:if="{{loading}}">
+    <view class="g-dot"></view>
+    <view class="g-dot"></view>
+    <view class="g-dot"></view>
+    <view class="g-dot"></view>
+</view>

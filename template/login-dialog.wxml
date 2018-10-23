@@ -1,0 +1,12 @@
+<template name="login-dialog">
+    <view class="dialog-container">
+        <view class="dialog-mask"></view>
+        <view class="dialog-info">
+            <view class="dialog-title">登录提示</view>
+            <view class="dialog-content">小程序需要您的授权才能提供更好的服务</view>
+            <view class="dialog-footer">
+                <button bindgetuserinfo="bindGetUserInfo" catchtap="hideAuthModal" class="dialog-btn" openType="getUserInfo">知道了</button>
+            </view>
+        </view>
+    </view>
+</template>

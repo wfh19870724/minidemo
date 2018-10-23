@@ -1,0 +1,23 @@
+<view class="body" wx:if="{{orderState==1}}">
+    <image class="pill" mode="aspectFit" src="/imgs/pill-success.png"></image>
+    <view class="message">已成功支付{{item.clinicFee}}元</view>
+    <view class="info">{{item.clinicDate}}  {{item.clinicTime}}</view>
+    <view class="info">{{item.hospitalName}}</view>
+    <view class="info">{{item.hospDeptName}} {{item.expertName}}</view>
+    <view>
+        <view class="g-loading" wx:if="{{loading}}">
+            <view class="g-dot"></view>
+            <view class="g-dot"></view>
+            <view class="g-dot"></view>
+            <view class="g-dot"></view>
+        </view>
+        <button bindtap="checkOrder" class="wy-btn" size="default"> 查看预约单 </button>
+    </view>
+</view>
+<view class="fail" wx:if="{{orderState==2}}">
+    <image class="pill" mode="aspectFit" src="/imgs/pill-fail.png"></image>
+    <view class="message">支付失败</view>
+    <view>
+        <button bindtap="repay" class="wy-btn" size="default"> 重新支付 </button>
+    </view>
+</view>

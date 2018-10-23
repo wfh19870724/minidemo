@@ -1,0 +1,7 @@
+<template name="contact-service">
+    <movable-view class="body-movable-view-contact" direction="all" outOfBounds="true" x="320" y="450">
+        <button class="contact-service-button" openType="contact">
+            <image class="contact-service-img" mode="widthFix" src="/imgs/entry-service.png"></image>
+        </button>
+    </movable-view>
+</template>

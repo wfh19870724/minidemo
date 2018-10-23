@@ -1,0 +1,12 @@
+<view class="body">
+    <scroll-view class="province g-hidden-scrollbar" scrollY="true">
+        <view bindtap="chooseProvince" class="province-item {{selectProvinceId==item.provinceId?'province-item-select':''}}" data-id="{{item.provinceId}}" data-index="{{idx}}" data-name="{{item.provinceName}}" wx:for="{{provinceArray}}" wx:for-index="idx" wx:key="idx">
+        {{item.provinceName}}
+        </view>
+    </scroll-view>
+    <view class="city g-hidden-scrollbar">
+        <view bindtap="chooseCity" class="city-item  {{selectCityId==item.areaId?'city-item-select':''}}" data-id="{{item.areaId}}" data-name="{{item.areaName}}" wx:for="{{cityArray}}" wx:for-index="idx" wx:key="idx">
+        {{item.areaName}} <text class="auto" wx:if="{{autoCityId==item.areaId}}">(自动定位)</text>
+        </view>
+    </view>
+</view>

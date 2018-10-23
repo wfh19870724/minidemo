@@ -1,0 +1,206 @@
+<view class="order-card">
+    <view class="doctor">
+        <image binderror="imgError" data-err-img="orderInfo.expertPhoto" src="{{orderInfo.expertPhoto}}"></image>
+        <text>XXX</text>医生</view>
+    <view class="order-info">
+        <view class="line">
+            <text class="key">就诊医院</text>
+            <text class="value">XX医院</text>
+        </view>
+        <view class="line">
+            <text class="key">科室医生</text>
+            <text class="value">XX科</text>
+        </view>
+        <view class="line">
+            <text class="key">门诊时间</text>
+            <text class="value orange">2018-10-21</text>
+        </view>
+        <view class="line">
+            <text class="key">门诊类型</text>
+            <text class="value">门诊</text>
+        </view>
+        <view class="line">
+            <text class="key">挂号费用</text>
+            <text class="value">10.0元</text>
+        </view>
+    </view>
+</view>
+<view class="order-form">
+    <form bindsubmit="orderformSubmit" reportSubmit="true">
+        <view bindtap="chosePatient" class="line g-arrow-right">
+            <text class="key {{invalid['patientId']?'error':''}}">就诊人</text>
+            <text class="value gray">{{formData.patientName||'请选择就诊人'}}</text>
+        </view>
+        <view bindtap="choseTime" class="line g-arrow-right" wx:if="{{orderInfo.timeSections.length&&orderInfo.timeSections[0].avaliable}}">
+            <text class="key {{invalid['timeSectionId']?'error':''}}">预约时间段</text>
+            <text class="value gray">{{formData.timeSection||'请选择预约时间段'}}</text>
+        </view>
+        <view bindtap="choseType" class="line {{noSelectVisit?'':'g-arrow-right'}}">
+            <text class="key {{invalid['visitType']?'error':''}}">初/复诊</text>
+            <text class="value gray">{{formData.visitTypeName||'请选择初/复诊'}}</text>
+        </view>
+        <view bindtap="choseDisease" class="line g-arrow-right">
+            <text class="key">疾病信息</text>
+            <text class="value gray">{{formData.diseaseName||'请填写疾病信息'}}</text>
+        </view>
+        <view class="line g-arrow-right">
+            <text class="key">支付方式</text>
+            <text bindtap="chosePayWay" class="value gray">{{formData.payWay||'请选择支付方式'}}</text>
+        </view>
+        <block wx:if="{{requireEntrys&&requireEntrys.length}}" wx:for="{{requireEntrys}}" wx:key="index">
+            <view class="line" wx:if="{{item.type==3}}">
+                <text class="key {{invalid[item.name]?'error':''}}">{{item.memo}}</text>
+                <input class="value card" name="{{item.name}}" password="true" placeholder="请输入"></input>
+            </view>
+            <view bindtap="choseConfig" class="line g-arrow-right" data-index="{{index}}" wx:if="{{item.type==2}}">
+                <text class="key {{invalid[item.name]?'error':''}}">{{item.memo}}</text>
+                <text class="value gray">{{formData[item.name+'_name']||'请选择'}}</text>
+            </view>
+            <view class="line" wx:if="{{item.type==0}}">
+                <text class="key {{invalid[item.name]?'error':''}}">{{item.memo}}</text>
+                <input class="value card" name="{{item.name}}" placeholder="请输入"></input>
+            </view>
+        </block>
+        <!-- <button class="next" formType="submit">下一步</button> -->
+        <navigator url="/pages/order-result/order-result" open-type="navigate" class="nav-btn active" hover-class="nav-hover">
+      <button class="next" formType="submit">下一步</button>
+    </navigator>
+    </form>
+</view>
+<view bindtap="showRule" class="rule g-arrow-right gray" wx:if="{{orderInfo.specialRules.length}}">
+  微医平台的挂号费由医院自行设定,平台不收取任何费用
+  <text>我已了解并同意以下规则(点击查看详情)</text>
+</view>
+<view class="rule-detail-group" wx:if="{{orderInfo.specialRules.length&&showRuleFlag}}">
+    <view class="rule-detail" wx:for="{{orderInfo.specialRules}}" wx:key="index">·{{item.rule}}</view>
+</view>
+<view class="modal-group" hidden="{{!modalType}}">
+    <view class="content chose-time" hidden="{{modalType!='chose_time'}}">
+        <text class="title">预约时间段</text>
+        <scroll-view class="list" scrollY="true">
+            <view hover bindtap="tapTime" class="item {{!item.avaliable?'gray':''}}" data-avaliable="{{item.avaliable}}" data-index="{{index}}" hoverClass="active" wx:for="{{formDataGroup.time.timeList}}" wx:key="index">{{item.timeSection}}{{!item.avaliable?'(预约已满)':''}}</view>
+        </scroll-view>
+        <view bindtap="cancel" class="cancel">取消</view>
+    </view>
+    <view class="chose-disease" hidden="{{modalType!='chose_disease'}}">
+        <view bindtap="cancel" class="g-close"></view>
+        <view class="title">填写疾病信息</view>
+        <view class="search">
+            <input bindinput="searchDisease" placeholder="请输入疾病名称"></input>
+        </view>
+        <scroll-view class="search-list" scrollY="true">
+            <view bindtap="tapDisease" class="search-item" data-id="-1" data-name="尚未确诊">尚未确诊</view>
+            <view bindtap="tapDisease" class="search-item" data-id="{{item.uuid}}" data-name="{{item.name}}" wx:for="{{diseaseList}}" wx:key="index">{{item.name}}</view>
+        </scroll-view>
+    </view>
+    <view class="chose-patient" hidden="{{modalType!='chose_patient'}}">
+        <view bindtap="cancel" class="g-close"></view>
+        <view class="title">选择就诊人</view>
+        <view bindtap="addPatient" class="sub-title" wx:if="{{formDataGroup.patient.patientLimit.lave>0}}">已添加{{formDataGroup.patient.patientLimit.number}}人，还能添加{{formDataGroup.patient.patientLimit.lave}}人</view>
+        <view bindtap="addPatient" class="sub-title" wx:if="{{formDataGroup.patient.patientLimit.lave==0}}">已添加{{formDataGroup.patient.patientLimit.number}}人，无法继续添加</view>
+        <scroll-view class="patient-list" scrollY="true">
+            <view bindtap="tapPatient" class="patient" data-age="{{item.age}}" data-card="{{item.cardNo}}" data-id="{{item.id}}" data-mobile="{{item.mobile}}" data-name="{{item.name}}" data-sex="{{item.sex}}" wx:for="{{formDataGroup.patient.patientList}}" wx:key="index">
+                <text class="gray">
+                    <text class="name">{{item.name}}</text>
+                    <text>{{item.sex==1?'男':'女'}}</text>
+                    <text>{{item.age}}岁</text>
+                    <text>{{item.defaultPatient?'[默认]':''}}</text>
+                </text>
+                <text class="block">{{item.mobile||'手机号未填写'}}</text>
+                <text class="block">{{item.cardNo||'身份证未填写'}}</text>
+                <text catchtap="editPatient" class="icon" data-index="{{index}}"></text>
+            </view>
+        </scroll-view>
+        <view bindtap="addPatient" class="add-btn" wx:if="{{formDataGroup.patient.patientLimit.lave>0}}">添加就诊人</view>
+    </view>
+    <view class="add-patient" hidden="{{modalType!='add_patient'}}">
+        <form bindsubmit="patientAddFormSubmit">
+            <view bindtap="cancel" class="g-close"></view>
+            <view class="title">添加就诊人</view>
+            <view class="warning" style="{{invalid.hasError?'':'opacity:0;'}}">请输入正确的就诊人信息</view>
+            <view class="line-group">
+                <view class="line">
+                    <text class="key {{invalid['name']?'error':''}}">姓名</text>
+                    <input class="value" name="name" placeholder="请输入真实的姓名"></input>
+                </view>
+                <view class="line">
+                    <text class="key {{invalid['cardNo']?'error':''}}">身份证</text>
+                    <input class="value" name="cardNo" placeholder="请输入真实的身份证号" type="idcard"></input>
+                </view>
+                <view class="line">
+                    <text class="key {{invalid['sex']?'error':''}}">性别</text>
+                    <view class="value sex">
+                        <radio-group bindchange="setSex" name="sex">
+                            <label class="{{patientData.sex==1?'active':''}}">男
+                <radio checked="{{patientData.sex==1}}" value="1"></radio>
+                            </label>
+                            <label class="{{patientData.sex==2?'active':''}}">女
+                <radio checked="{{patientData.sex==2}}" value="2"></radio>
+                            </label>
+                        </radio-group>
+                    </view>
+                </view>
+                <view class="line">
+                    <text class="key">年龄</text>
+                    <picker bindchange="setAge" class="value" end="{{endDate}}" mode="date" start="1900-01" value="{{date}}">
+                        <text class="value">{{patientData.age||'请选择年龄'}}</text>
+                    </picker>
+                </view>
+                <view class="line">
+                    <text class="key {{invalid['mobile']?'error':''}}">手机号</text>
+                    <input class="value" name="mobile" placeholder="便于接受预约短信，请谨慎填写" type="number"></input>
+                </view>
+                <view class="line">
+                    <text class="key">设为默认</text>
+                    <switch class="switch" name="defaultPatient" type="switch"></switch>
+                </view>
+            </view>
+            <button class="add-btn" formType="submit">保存</button>
+        </form>
+    </view>
+    <view class="add-patient edit" hidden="{{modalType!='edit_patient'}}">
+        <form bindsubmit="patientEditFormSubmit">
+            <view bindtap="cancel" class="g-close"></view>
+            <view class="title">编辑就诊人</view>
+            <view class="warning" style="{{invalid.hasError?'':'opacity:0;'}}">请输入正确的就诊人信息</view>
+            <view class="line-group">
+                <view class="line">
+                    <text class="key {{invalid['cardNo']?'error':''}}">身份证</text>
+                    <input class="value" name="cardNo" placeholder="请输入真实的身份证号" type="idcard" value="{{patientData.cardNo}}"></input>
+                </view>
+                <view class="line">
+                    <text class="key">年龄</text>
+                    <picker bindchange="setAge" class="value" end="{{endDate}}" mode="date" start="1900-01-01" value="{{date}}">
+                        <text class="value">{{patientData.age}}</text>
+                    </picker>
+                </view>
+                <view class="line">
+                    <text class="key {{invalid['mobile']?'error':''}}">手机号</text>
+                    <input class="value" name="mobile" placeholder="便于接受预约短信，请谨慎填写" value="{{patientData.mobile}}"></input>
+                </view>
+                <view class="line">
+                    <text class="key">设为默认</text>
+                    <switch checked="{{patientData.isDefault}}" class="switch" name="isDefault" type="switch"></switch>
+                </view>
+            </view>
+            <button class="add-btn" formType="submit">保存</button>
+        </form>
+    </view>
+    <view animation="{{animationData}}" class="valid-code" hidden="{{modalType!='valid_code'}}">
+        <view bindtap="cancel" class="g-close"></view>
+        <view class="title">请输入验证码</view>
+        <view class="warning" style="{{invalid.hasError?'':'opacity:0;'}}">{{errorMessage}}</view>
+        <view class="phone">{{phoneNum}}
+      <view bindtap="resendCode" class="resend">{{resendTime>0?resendTime+'s':'重新发送'}}</view>
+        </view>
+        <input bindinput="inputValidCode" class="hidden-input" focus="{{isFocus}}" maxlength="6" type="number" value="{{value}}"></input>
+        <view bindtap="focusInput" class="code-group">
+            <view class="code">{{validCode[0]}}</view>
+            <view class="code">{{validCode[1]}}</view>
+            <view class="code">{{validCode[2]}}</view>
+            <view class="code">{{validCode[3]}}</view>
+            <view class="code">{{validCode[4]}}</view>
+            <view class="code">{{validCode[5]}}</view>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,24 @@
+<template name="hospital-item">
+    <view bindtap="toHospitalPage" class="g-scroll-view-item" data-hospital-id="{{hospitalId}}" data-name="{{hospitalName}}">
+        <image binderror="hospitalImgError" class="g-hospital-avatar" data-err-img="hospitalList[{{index}}].hospitalPhoto" data-home-err-img="homeHospitalList[{{index}}].hospitalPhoto" mode="scaleToFill" src="{{hospitalPhoto}}"></image>
+        <view class="g-hospital-info-con">
+            <view class="g-middle-size">{{hospitalName}}</view>
+            <view class="g-con-line g-small-size">
+                <text class="g-color-orange g-margin-right">{{hospitalLevel}}</text>
+                <text class="g-color-light">预约量 {{orderCount}}</text>
+            </view>
+            <view class="g-con-line g-small-size g-color-light clearfix">
+                <view class="g-tag  g-margin-right" wx:for="{{featureDeptList}}" wx:for-item="department" wx:key="deptId">
+                    {{department.deptName}}
+                </view>
+            </view>
+            <view class="g-con-line g-small-size g-color-light clearfix">
+                <view class="service" wx:for="{{functionList}}" wx:for-item="functionName" wx:key="functionName">
+                    <icon size="12" type="success"></icon>
+                    <text> {{functionName.functionName}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="g-hospital-distance g-color-light g-small-size">{{distanceDesc}}</view>
+    </view>
+</template>

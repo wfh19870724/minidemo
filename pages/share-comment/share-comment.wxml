@@ -1,0 +1,47 @@
+<view class="comment">
+    <image binderror="imgError" class="doctor-photo" data-err-img="doctorInfo.expertPhoto" src="{{doctorInfo.expertPhoto}}"></image>
+    <text class="text-line">{{doctorInfo.expertName}}</text>
+    <view class="star-group">
+        <view bindtap="tapStar" class="star {{star>0?'':'gray'}}" data-index="1"></view>
+        <view bindtap="tapStar" class="star {{star>1?'':'gray'}}" data-index="2"></view>
+        <view bindtap="tapStar" class="star {{star>2?'':'gray'}}" data-index="3"></view>
+        <view bindtap="tapStar" class="star {{star>3?'':'gray'}}" data-index="4"></view>
+        <view bindtap="tapStar" class="star {{star>4?'':'gray'}}" data-index="5"></view>
+    </view>
+    <text class="text-line">{{starComment[star-1]||'满意度评分'}}</text>
+    <view class="tag-group" wx:if="{{tagList&&tagList.length}}">
+        <view bindtap="choseTag" class="tag {{tagList[index].active?'':'gray'}}" data-id="{{item.tagId}}" data-index="{{index}}" wx:for="{{tagList}}">{{item.tagName}}</view>
+    </view>
+    <textarea bindinput="inputComment" hidden="{{modalType=='chose_disease'}}" placeholder="记录印象深刻的诊疗过程和评价，给予其他的病友帮助" value="{{defaultComment}}"></textarea>
+</view>
+<view class="tag-line">
+    <text>疾病信息</text>
+    <view bindtap="choseDiseaseInfo" class="tag {{tagLine1==1?'':'gray'}}" data-index="1">已确诊</view>
+    <view bindtap="choseDiseaseInfo" class="tag {{tagLine1==2?'':'gray'}}" data-index="2">未确诊</view>
+</view>
+<view bindtap="choseDisease" class="tag-line g-arrow-right" wx:if="{{tagLine1==1}}">
+    <text>请选择疾病</text>
+    <text style="float: right;margin-right: 30rpx;">{{disease.diseaseName}}</text>
+</view>
+<view class="tag-line">
+    <text>看病目的</text>
+    <view bindtap="chosePurpose" class="tag {{tagLine2==1?'':'gray'}}" data-index="1">其他</view>
+    <view bindtap="chosePurpose" class="tag {{tagLine2==2?'':'gray'}}" data-index="2">复诊</view>
+    <view bindtap="chosePurpose" class="tag {{tagLine2==3?'':'gray'}}" data-index="3">初诊</view>
+</view>
+<view class="tag-line" wx:if="{{tagLine2==1}}">
+    <input bindinput="inputReason" placeholder="请输入看病目的"></input>
+</view>
+<view bindtap="commit" class="btn">提交</view>
+<view class="modal-group" hidden="{{!modalType}}">
+    <view class="chose-disease" hidden="{{modalType!='chose_disease'}}">
+        <view bindtap="cancel" class="g-close"></view>
+        <view class="title">填写疾病信息</view>
+        <view class="search">
+            <input bindinput="searchDisease" placeholder="请输入疾病名称"></input>
+        </view>
+        <scroll-view class="search-list" scrollY="true">
+            <view bindtap="tapDisease" class="search-item" data-id="{{item.uuid}}" data-name="{{item.name}}" wx:for="{{diseaseList}}">{{item.name}}</view>
+        </scroll-view>
+    </view>
+</view>

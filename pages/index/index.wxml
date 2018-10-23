@@ -1,0 +1,132 @@
+<import src="../../template/hospital-item.wxml"></import>
+<import src="../../template/doctor-item.wxml"></import>
+<import src="../../template/bind-account.wxml"></import>
+<import src="../../template/login-dialog.wxml"></import>
+<import src="../../template/entry-activity.wxml"></import>
+<!-- <import src="../../template/contact-service.wxml"></import> -->
+<movable-area class="body-movable">
+
+    <template is="entry-activity" data="{{...entryActivity}}" wx:if="{{entryShow}}"></template>
+    <template is="login-dialog" data wx:if="{{authModal}}"></template>
+    <!-- <template is="contact-service" data></template> -->
+    
+    <view class="body" wx:if="{{showHome}}">
+        
+<view class="matrix">
+    <button open-type="contact" class="nav-btn active" hover-class="nav-hover">
+      <view class="matrix-btn kswz">
+        <icon class="kswz"/>
+        <view class="title">快速问诊</view>
+        <view class="info">足不出户 咨询专家</view>
+      </view>
+    </button>
+ 
+    <navigator url="/pages/news/news2/news2" open-type="navigate" class="nav-btn active" hover-class="nav-hover">
+      <view class="matrix-btn yygh">
+        <icon class="yygh"/>
+        <view class="title">健康小知识</view>
+        <view class="info">热爱生活 关注健康</view>
+      </view>
+    </navigator>
+  
+    
+  </view>
+
+         
+
+
+
+
+
+
+<view class="logo flex">
+            <!-- <image backgroundSize="cover" class="banner" src="/imgs/banner.png"></image> -->
+            <view class="flex search-box">
+                <navigator class="area" hoverClass="none" url="/pages/address-switch/address-switch">{{address}}</navigator>
+                <image class="icon-search" src="http://img.guahao.com/h5/img/magnifier.png?_=1195af8"></image>
+                <view bindtap="toSearch" class="search-wrap g-color-light">
+          输入要搜索的医院、医生、科室、疾病
+      </view>
+            </view>
+        </view>
+        <view class="sort flex">
+            <view bindtap="sort" class="sort-item {{sortid==1?'on':''}}" data-sortid="1">综合排序</view>
+            <view bindtap="sort" class="sort-item {{sortid==2?'on':''}}" data-sortid="2">离我最近</view>
+            <!-- <view bindtap="sort" class="sort-item {{sortid==3?'on':''}}" data-sortid="3">预约量↓</view> -->
+        </view>
+        <view class="hospital-list">
+            <template is="hospital-item" data="{{...item,index:index}}" wx:for="{{homeHospitalList}}" wx:key="hospitalId"></template>
+        </view>
+        <view class="g-index-empty" wx:if="{{!homeloading&&homeHospitalList.length==0}}">
+            <image class="g-empty-img" src="https://img.guahao.com/h5/img/icons/noresult-2.png"></image>
+            <view class="g-title-size g-con-line">抱歉，暂未找到符合条件的结果</view>
+            <view class="g-color-light g-con-line">请切换地区试试~</view>
+        </view>
+        <view class="g-loading" wx:if="{{homeloading}}">
+            <view class="g-dot"></view>
+            <view class="g-dot"></view>
+            <view class="g-dot"></view>
+            <view class="g-dot"></view>
+        </view>
+    </view>
+    <view class="body search-body" wx:if="{{!showHome}}">
+        <view class="flex search-box2">
+            <image class="icon-search2" src="http://img.guahao.com/h5/img/magnifier.png?_=1195af8"></image>
+            <view class="search-wrap2">
+                <input bindconfirm="searchConfirm" bindfocus="searchFocus" bindinput="searchInput" class="search" focus="true" maxlength="20" placeholder="输入要搜索的医院、医生、科室、疾病" type="text" value="{{iptValue}}"></input>
+            </view>
+            <view bindtap="deleteVal" class="icon-delete-val" wx:if="{{showDeleteVal}}">
+                <icon color="#ddd" size="15" type="clear"></icon>
+            </view>
+            <view bindtap="toHome" class="search-cancel">取消</view>
+        </view>
+        <view class="history" wx:if="{{showHistory}}">
+            <view bindtap="onHistory" class="suggest-item" data-name="{{item}}" wx:for="{{historyList}}" wx:for-index="idx">
+            {{item}}
+        </view>
+            <view bindtap="clearHistory" class="clear-history">清理搜索历史</view>
+        </view>
+        <view class="suggest" wx:if="{{showSuggest}}">
+            <view bindtap="onSuggest" class="suggest-item" data-name="{{item.name}}" data-type="{{type}}" data-uuid="{{item.uuid}}" wx:for="{{suggestList}}" wx:for-index="idx">
+            {{item.name}}
+        </view>
+        </view>
+        <view class="results" wx:if="{{showResults}}">
+            <view class="tab-wrap">
+                <view bindtap="onTab" class="tab" data-rtype="0">
+                    <view class="{{showDoctor==true?'':'tab-select'}}">医院</view>
+                </view>
+                <view bindtap="onTab" class="tab" data-rtype="1">
+                    <view class="{{showDoctor==true?'tab-select':''}}">医生</view>
+                </view>
+            </view>
+            <scroll-view class="result-scroll" hidden="{{showDoctor?true:false}}" scrollY="true">
+                <template is="hospital-item" data="{{...item,index:index}}" wx:for="{{hospitalList}}"></template>
+                <view class="g-loading" wx:if="{{loadingHospital}}">
+                    <view class="g-dot"></view>
+                    <view class="g-dot"></view>
+                    <view class="g-dot"></view>
+                    <view class="g-dot"></view>
+                </view>
+                <view class="clear-history" wx:if="{{noHospital&&!noDoctor}}">
+                    <image class="g-empty-img" src="/imgs/pill-fail.png"></image>没有搜到相关医院</view>
+            </scroll-view>
+            <scroll-view class="result-scroll" hidden="{{showDoctor?false:true}}" scrollY="true">
+                <template is="doctor-item" data="{{...item,index:index}}" wx:for="{{doctorList}}"></template>
+                <view class="g-loading" wx:if="{{loadingDoctor}}">
+                    <view class="g-dot"></view>
+                    <view class="g-dot"></view>
+                    <view class="g-dot"></view>
+                    <view class="g-dot"></view>
+                </view>
+                <view class="clear-history" wx:if="{{noDoctor&&!noHospital}}">
+                    <image class="g-empty-img" src="/imgs/pill-fail.png"></image>没有搜到相关医生</view>
+            </scroll-view>
+            <view class="g-empty" wx:if="{{isEmpty}}">
+                <image class="g-empty-img" src="/imgs/pill-fail.png"></image>
+                <view class="g-title-size g-con-line">没有找到与“{{q}}”相关的结果</view>
+            </view>
+        </view>
+    </view>
+    <template is="bind-account" data="{{binding:binding,showError:showError,errorMsg:errorMsg,canSendCode:canSendCode,sendText:sendText}}"></template>
+</movable-area>

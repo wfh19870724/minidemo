@@ -1,0 +1,79 @@
+page {
+    height: 100%;
+}
+
+.body {
+    position: relative;
+    height: 100%;
+}
+
+.province {
+    width: 380rpx;
+    background-color: #f2f2f2;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+}
+
+.province-item {
+    height: 80rpx;
+    line-height: 80rpx;
+    padding-left: 40rpx;
+    border-bottom: 1rpx solid #eee;
+    font-size: 28rpx;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.province-item-select {
+    background-color: #fff;
+}
+
+.city {
+    width: 375rpx;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    background-color: #fff;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+.city-item {
+    height: 80rpx;
+    line-height: 80rpx;
+    padding-left: 40rpx;
+    border-bottom: 1rpx solid #fff;
+    font-size: 28rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.city-item-select {
+    position: relative;
+}
+
+.city-item-select::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 12rpx solid transparent!important;
+    border-left-color: #3872f4!important;
+    position: absolute;
+    left: 14rpx;
+    top: 28rpx;
+}
+
+.auto {
+    color: #999;
+    font-size: 24rpx;
+}

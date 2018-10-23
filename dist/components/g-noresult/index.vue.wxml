@@ -1,0 +1,6 @@
+<template name="124d110a">
+    <view class="_div data-v-a852f012 g-noresult" hidden="{{!show}}">
+        <image class="_img data-v-a852f012 g-noresult--img" src="/imgs/pill-fail.png"></image>
+        <view class="_div data-v-a852f012 g-noresult--message">{{message}}</view>
+    </view>
+</template>
