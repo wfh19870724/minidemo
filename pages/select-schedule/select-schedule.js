@@ -208,11 +208,13 @@ Page({
           console.info(e.data);
           console.info(t);
             var i = t.currentTarget.dataset, n = i.id, o = i.status, s = i.name, d = i.price, r = i.type;
-               if (e.data.id = n, 1 == o) {e.getConfigLoading = !0, wx.showLoading({
-                title: "加载中",
-                mask: !0
+               if (e.data.id = n, 1 == o) {
+            //      e.getConfigLoading = !0, 
+            //    wx.showLoading({
+            //     title: "加载中",
+            //     mask: !0
                 
-            }); 
+            // }); 
                 
                 
                   console.info(1111)

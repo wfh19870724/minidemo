@@ -79,7 +79,9 @@ Page({
         var e = this;
         e.setData({
             scheduleLoading: !0
-        }), wx.showLoading({
+        }), 
+        console.info("2222")
+        wx.showLoading({
             title: "加载中"
         }), a.requestH5api({
             url: "/doctor/doctorshiftsearch/list.json",
@@ -106,6 +108,9 @@ Page({
                     scheduleLoading: !1
                 });
             },
+          fail: function () {
+            wx.hideLoading();
+          },
             complete: function() {
                 wx.hideLoading();
             }
@@ -115,9 +120,11 @@ Page({
         var t = this;
         t.setData({
             doctorLoading: !0
-        }), wx.showLoading({
+        }), 
+        wx.showLoading({
             title: "加载中"
-        }), a.requestH5api({
+        }), 
+        a.requestH5api({
             url: "/doctor/doctorsearch/list.json",
             data: {
                 department: t.data.deptId,
@@ -150,19 +157,24 @@ Page({
     },
     jumpOrderByDate: function(t) {
       console.info(t.currentTarget.dataset.id)
-        if (this.authLogin()) {
+        // if (this.authLogin()) {
             var e = t.currentTarget.dataset.id;
             this.setData({
                 id: e
             });
             var o = a.globalData.loginInfo.state, s = t.currentTarget.dataset.status;
-            if (o) {
-                if (10 != s) return;
+            // if (o) {
+            //     // if (10 != s) return;
                 this.getConfig(e);
-            } else this.setData({
-                binding: !0
-            });
-        }
+            // } else {this.setData({
+            //     // binding: !0
+            // });
+              a.globalData.loginInfo.state=!0;
+            // }
+          wx.navigateTo({
+            url: "/pages/order-info/order-info?shiftCaseId=" + t
+          });
+        // }
     },
     cancel: function() {
         this.setData({
@@ -230,14 +242,15 @@ Page({
         }));
     },
     jumpOrderByDoctor: function(t) {
-        if (this.authLogin()) {
+        // if (this.authLogin()) {
             var e = t.currentTarget.dataset;
+      a.globalData.loginInfo.state=!0;
             a.globalData.loginInfo.state ? wx.navigateTo({
                 url: "/pages/select-schedule/select-schedule?doctorId=" + e.id + "&deptId=" + this.data.deptId + "&hospitalId=" + this.data.hospitalId + "&totalOrderCount=" + e.count
             }) : this.setData({
-                binding: !0
+                // binding: !0
             });
-        }
+        // }
     },
     onLoad: function(t) {
         this.setData({
@@ -296,7 +309,7 @@ Page({
             }
         });
     },
-    bind:function(){
+    bind1:function(){
       var t = this;
       // a.globalData.loginInfo.loginToken = "xxxxxxxxxxx",
          a.globalData.loginInfo.state = !0, 
@@ -305,11 +318,9 @@ Page({
           showError: !1,
           errorMsg: ""})
     },
-    bind1:function() {
+    bind:function() {
         var t = this, 
         e = this.data.mobile, o = this.data.code;
-
-
         return "" === e ? (this.setData({
             showError: !0,
             errorMsg: "请输入手机号码"
@@ -321,6 +332,7 @@ Page({
             errorMsg: ""
         }), void wx.request({
             url: a.globalData.psServer + "/json/white/miniprogrom/bind",
+              // url:"http://localhost:8080/json/white/miniprogrom/bind",
             method: "GET",
             header: {
                 appid: "mini-app"
@@ -332,6 +344,7 @@ Page({
                 plat: "mircowx"
             },
             success: function(e) {
+              console.info(e);
                 !1 === e.data.hasError ? (a.globalData.loginInfo.loginToken = e.data.data.loginToken, 
                 a.globalData.loginInfo.state = !0, t.setData({
                     binding: !1,

@@ -32,7 +32,7 @@ Page({
     },
     onShareAppMessage: function() {
         return {
-            title: "微医挂号平台",
+            title: "挂号平台demo",
             path: "/pages/index/index"
         };
     },
@@ -54,21 +54,21 @@ Page({
     },
     getTagList: function() {
         var t = this;
-        a.requestH5api({
-            url: "/comment/ordercomment/taglist.json",
-            data: {
-                tagType: 0
-            },
-            success: function(a) {
-                if (a && 0 == a.flag && a.items) {
-                    for (var e = 0; e < a.items.length; e++) t.data.starTag[a.items[e].start] = a.items[e];
-                    t.setData({
-                        tagList: t.data.starTag[t.data.star] && t.data.starTag[t.data.star].tagList || [],
-                        starTag: t.data.starTag
-                    });
-                }
-            }
-        });
+        // a.requestH5api({
+        //     url: "/comment/ordercomment/taglist.json",
+        //     data: {
+        //         tagType: 0
+        //     },
+        //     success: function(a) {
+        //         if (a && 0 == a.flag && a.items) {
+        //             for (var e = 0; e < a.items.length; e++) t.data.starTag[a.items[e].start] = a.items[e];
+        //             t.setData({
+        //                 tagList: t.data.starTag[t.data.star] && t.data.starTag[t.data.star].tagList || [],
+        //                 starTag: t.data.starTag
+        //             });
+        //         }
+        //     }
+        // });
     },
     choseTag: function(a) {
         var t = a.currentTarget.dataset.index, e = a.currentTarget.dataset.id;
@@ -118,42 +118,48 @@ Page({
     },
     searchDisease: function(t) {
         var e = this;
-        e.data.searching || (e.data.searching = !0, a.requestH5api({
-            url: "/common/searchsuggest/list.json",
-            data: {
-                q: t.detail.value,
-                limit: 10,
-                type: "disease"
-            },
-            success: function(a) {
-                console.log(a), 0 == a.flag && e.setData({
-                    diseaseList: a.items
-                });
-            },
-            complete: function() {
-                e.data.searching = !1;
-            }
-        }));
+        // e.data.searching || (e.data.searching = !0, a.requestH5api({
+        //     url: "/common/searchsuggest/list.json",
+        //     data: {
+        //         q: t.detail.value,
+        //         limit: 10,
+        //         type: "disease"
+        //     },
+        //     success: function(a) {
+        //         console.log(a), 0 == a.flag && e.setData({
+        //             diseaseList: a.items
+        //         });
+        //     },
+        //     complete: function() {
+        //         e.data.searching = !1;
+        //     }
+        // }));
     },
     commit: function() {
         var t = this, e = [];
         for (var s in t.data.tagString) t.data.tagString[s] && e.push(s);
-        t.data.formData.tagIds = e.join(","), t.data.formData.diseaseId = t.data.disease.diseaseId, 
-        t.data.formData.diseaseName = t.data.disease.diseaseName, 0 == t.data.formData.diseaseId && delete t.data.formData.diseaseId, 
-        "" != t.data.formData.diseaseName ? "" != t.data.formData.reason ? "" != t.data.formData.content ? 0 != t.data.formData.satisfaction ? a.requestH5api({
-            url: "/comment/ordercomment/save.json",
-            data: t.data.formData,
-            success: function(a) {
-                0 == a.flag ? (wx.showToast({
+        t.data.formData.tagIds = e.join(","),
+         t.data.formData.diseaseId = t.data.disease.diseaseId, 
+        t.data.formData.diseaseName = t.data.disease.diseaseName, 
+        0 == t.data.formData.diseaseId && delete t.data.formData.diseaseId, 
+        "" != t.data.formData.diseaseName ? "" != t.data.formData.reason ? "" != t.data.formData.content ? 0 != t.data.formData.satisfaction ? 
+        // a.requestH5api({
+        //     url: "/comment/ordercomment/save.json",
+        //     data: t.data.formData,
+        //     success: function(a) {
+        //         0 == a.flag ? (
+                  wx.showToast({
                     title: "评价成功",
                     icon: "success",
                     duration: 2e3
-                }), wx.navigateBack()) : wx.showToast({
-                    icon: "none",
-                    title: a.message || "评价失败",
-                    duration: 2e3
-                });
-            }
+        //         }),
+        //         wx.navigateBack()) : 
+                // wx.showToast({
+                //     icon: "none",
+                //     title: a.message || "评价失败",
+                //     duration: 2e3
+            //     });
+            // }
         }) : wx.showToast({
             icon: "none",
             title: "请选择星级！",
@@ -174,20 +180,20 @@ Page({
     },
     getDetail: function(t) {
         var e = this;
-        a.requestH5api({
-            url: a.globalData.haServer + "/order/orderinfo/mergedetail.json",
-            data: {
-                bizId: t,
-                bizCode: 1
-            },
-            success: function(a) {
-                0 == a.flag && a && e.setData({
-                    doctorInfo: a,
-                    tagLine2: 1 == a.visitType ? 2 : 3,
-                    "formData.reason": 0 == a.visitType ? "初诊" : "复诊"
-                });
-            }
-        });
+        // a.requestH5api({
+        //     url: a.globalData.haServer + "/order/orderinfo/mergedetail.json",
+        //     data: {
+        //         bizId: t,
+        //         bizCode: 1
+        //     },
+        //     success: function(a) {
+        //         0 == a.flag && a && e.setData({
+        //             doctorInfo: a,
+        //             tagLine2: 1 == a.visitType ? 2 : 3,
+        //             "formData.reason": 0 == a.visitType ? "初诊" : "复诊"
+        //         });
+        //     }
+        // });
     },
     onLoad: function(a) {
         if (this.data.formData.orderNo = a.id, this.getDetail(this.data.formData.orderNo), 

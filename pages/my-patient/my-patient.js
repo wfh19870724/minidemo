@@ -116,25 +116,25 @@ Page({
     },
     getPatientList: function() {
         var a = this;
-        t.requestH5api({
-            url: "/patient/list.json",
-            success: function(t) {
-                0 == t.flag && a.setData({
-                    "formDataGroup.patient.patientList": t.items || []
-                });
-            }
-        });
+        // t.requestH5api({
+        //     url: "/patient/list.json",
+        //     success: function(t) {
+        //         0 == t.flag && a.setData({
+        //             "formDataGroup.patient.patientList": t.items || []
+        //         });
+        //     }
+        // });
     },
     getPatientLimit: function() {
         var a = this;
-        t.requestH5api({
-            url: "/patient/getlimitinfo.json",
-            success: function(t) {
-                console.log(t), 0 == t.flag && t.limitInfo && a.setData({
-                    "formDataGroup.patient.patientLimit": t.limitInfo
-                });
-            }
-        });
+        // t.requestH5api({
+        //     url: "/patient/getlimitinfo.json",
+        //     success: function(t) {
+        //         console.log(t), 0 == t.flag && t.limitInfo && a.setData({
+        //             "formDataGroup.patient.patientLimit": t.limitInfo
+        //         });
+        //     }
+        // });
     },
     editPatientRequest: function(a) {
         var e = this;

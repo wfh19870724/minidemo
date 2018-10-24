@@ -3,7 +3,7 @@ var a = require("../../utils/util.js"), e = getApp();
 Page({
     data: {
         pageno: 1,
-        orderList: [],
+      orderList: [{ "clinicDate": "2018-10-10", "timeType": "1", "orderStatus": "专家", "orderNo": "00001", "expertPhoto": "", "expertName": "骨科", "hospDeptName": "301", "hospitalName": "301", "name": "张三", "clinicFee": "60", "orderStatus": "待评价", "diseaseName": "","visitTypeDescs":""}],
         loading: !0,
         empty: !1,
         allLoaded: !1
@@ -11,7 +11,7 @@ Page({
     onShow: function(a) {
         this.setData({
             pageno: 1,
-            orderList: [],
+          orderList: [{ "clinicDate": "2018-10-10", "timeType": "1", "orderStatus": "专家", "orderNo": "00001", "expertPhoto": "", "expertName": "骨科", "hospDeptName": "301", "hospitalName": "301", "name": "张三", "clinicFee": "60", "orderStatus": "待评价", "diseaseName": "", "visitTypeDescs": "" }],
             loading: !0,
             empty: !1
         }), this.getlist(1);
@@ -24,38 +24,38 @@ Page({
     },
     getlist: function(t) {
         var i = this;
-        e.requestH5api({
-            url: e.globalData.haServer + "/order/orderinfo/list.json",
-            data: {
-                pageNo: t,
-                pageSize: 10
-            },
-            success: function(e) {
-                if (e && "0" == e.flag && e.items) {
-                    var t, r = e.items, o = r.length;
-                    for (t = 0; t < o; t++) {
-                        var n = r[t].clinicFee;
-                        n = a.accMul(n, .01), r[t].clinicFee = n;
-                    }
-                    i.setData({
-                        orderList: i.data.orderList.concat(r)
-                    });
-                } else console.log("订单数据请求失败");
-                e.pageNo && e.pageSize && e.pageNo >= e.pageSize && i.setData({
-                    allLoaded: !0
-                });
-            },
-            fail: function(a) {
-                console.log("订单数据请求失败！");
-            },
-            complete: function() {
-                i.setData({
-                    loading: !1
-                }), 0 === i.data.orderList.length && i.setData({
-                    empty: !0
-                });
-            }
-        });
+        // e.requestH5api({
+        //     url: e.globalData.haServer + "/order/orderinfo/list.json",
+        //     data: {
+        //         pageNo: t,
+        //         pageSize: 10
+        //     },
+        //     success: function(e) {
+        //         if (e && "0" == e.flag && e.items) {
+        //             var t, r = e.items, o = r.length;
+        //             for (t = 0; t < o; t++) {
+        //                 var n = r[t].clinicFee;
+        //                 n = a.accMul(n, .01), r[t].clinicFee = n;
+        //             }
+        //             i.setData({
+        //                 orderList: i.data.orderList.concat(r)
+        //             });
+        //         } else console.log("订单数据请求失败");
+        //         e.pageNo && e.pageSize && e.pageNo >= e.pageSize && i.setData({
+        //             allLoaded: !0
+        //         });
+        //     },
+        //     fail: function(a) {
+        //         console.log("订单数据请求失败！");
+        //     },
+        //     complete: function() {
+        //         i.setData({
+        //             loading: !1
+        //         }), 0 === i.data.orderList.length && i.setData({
+        //             empty: !0
+        //         });
+        //     }
+        // });
     },
     lower: function(a) {
         if (this.data.allLoaded) return this;

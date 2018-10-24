@@ -16,30 +16,30 @@ Page({
     },
     onShareAppMessage: function() {
         return {
-            title: "微医挂号平台",
+            title: "挂号平台demo",
             path: "/pages/index/index"
         };
     },
     getDetail: function(a) {
         var r = this;
-        t.requestH5api({
-            url: t.globalData.haServer + "/order/orderinfo/mergedetail.json",
-            data: {
-                bizId: a,
-                bizCode: 1
-            },
-            success: function(t) {
-                if (t && "0" == t.flag && t) {
-                    var a = t, i = a.clinicFee;
-                    i = e.accMul(i, .01), a.clinicFee = i, r.setData({
-                        item: a
-                    });
-                } else console.log("订单数据请求失败");
-            },
-            fail: function(e) {
-                console.log("订单数据请求失败！");
-            }
-        });
+        // t.requestH5api({
+        //     url: t.globalData.haServer + "/order/orderinfo/mergedetail.json",
+        //     data: {
+        //         bizId: a,
+        //         bizCode: 1
+        //     },
+        //     success: function(t) {
+        //         if (t && "0" == t.flag && t) {
+        //             var a = t, i = a.clinicFee;
+        //             i = e.accMul(i, .01), a.clinicFee = i, r.setData({
+        //                 item: a
+        //             });
+        //         } else console.log("订单数据请求失败");
+        //     },
+        //     fail: function(e) {
+        //         console.log("订单数据请求失败！");
+        //     }
+        // });
     },
     checkOrder: function() {
         wx.reLaunch({

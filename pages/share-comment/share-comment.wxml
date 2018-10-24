@@ -10,7 +10,7 @@
     </view>
     <text class="text-line">{{starComment[star-1]||'满意度评分'}}</text>
     <view class="tag-group" wx:if="{{tagList&&tagList.length}}">
-        <view bindtap="choseTag" class="tag {{tagList[index].active?'':'gray'}}" data-id="{{item.tagId}}" data-index="{{index}}" wx:for="{{tagList}}">{{item.tagName}}</view>
+        <view bindtap="choseTag" class="tag {{tagList[index].active?'':'gray'}}" data-id="{{item.tagId}}" data-index="{{index}}" wx:for="{{tagList}}" wx:key="index">{{item.tagName}}</view>
     </view>
     <textarea bindinput="inputComment" hidden="{{modalType=='chose_disease'}}" placeholder="记录印象深刻的诊疗过程和评价，给予其他的病友帮助" value="{{defaultComment}}"></textarea>
 </view>
@@ -41,7 +41,7 @@
             <input bindinput="searchDisease" placeholder="请输入疾病名称"></input>
         </view>
         <scroll-view class="search-list" scrollY="true">
-            <view bindtap="tapDisease" class="search-item" data-id="{{item.uuid}}" data-name="{{item.name}}" wx:for="{{diseaseList}}">{{item.name}}</view>
+            <view bindtap="tapDisease" class="search-item" data-id="{{item.uuid}}" data-name="{{item.name}}" wx:for="{{diseaseList}}" wx:key="index">{{item.name}}</view>
         </scroll-view>
     </view>
 </view>

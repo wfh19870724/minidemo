@@ -45,14 +45,14 @@ Page({
         wx.navigateTo({
             url: "../my-order/my-order"
         }) ; this.setData({
-            binding: !0
+            // binding: !0
         });
     },
     onContacts: function() {
         wx.navigateTo({
             url: "../my-patient/my-patient"
         }) ;this.setData({
-            binding: !0
+            // binding: !0
         });
     },
     closebind: function() {

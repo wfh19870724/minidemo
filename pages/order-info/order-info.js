@@ -170,21 +170,21 @@ Page({
     },
     getPatientList: function() {
         var t = this;
-        a.requestH5api({
-            url: "/patient/list.json",
-            success: function(a) {
-                if (0 == a.flag && a.items && (t.setData({
-                    "formDataGroup.patient.patientList": a.items
-                }), "" == t.data.formData.patientId)) for (var e = 0; e < a.items.length; e++) {
-                    var i = a.items[e];
-                    if ((3 == t.data.orderInfo.sexLimit || i.sex == t.data.orderInfo.sexLimit) && !(i.age < t.data.orderInfo.ageLowerLimit || i.age > t.data.orderInfo.ageTopLimit)) return void t.setData({
-                        "formData.patientId": i.id,
-                        "formData.patientName": i.name,
-                        phoneNum: i.mobile
-                    });
-                }
-            }
-        });
+        // a.requestH5api({
+        //     url: "/patient/list.json",
+        //     success: function(a) {
+        //         if (0 == a.flag && a.items && (t.setData({
+        //             "formDataGroup.patient.patientList": a.items
+        //         }), "" == t.data.formData.patientId)) for (var e = 0; e < a.items.length; e++) {
+        //             var i = a.items[e];
+        //             if ((3 == t.data.orderInfo.sexLimit || i.sex == t.data.orderInfo.sexLimit) && !(i.age < t.data.orderInfo.ageLowerLimit || i.age > t.data.orderInfo.ageTopLimit)) return void t.setData({
+        //                 "formData.patientId": i.id,
+        //                 "formData.patientName": i.name,
+        //                 phoneNum: i.mobile
+        //             });
+        //         }
+        //     }
+        // });
     },
     checkPatient: function(a) {
         var t = this;
@@ -200,182 +200,183 @@ Page({
     },
     getPatientLimit: function() {
         var t = this;
-        a.requestH5api({
-            url: "/patient/getlimitinfo.json",
-            success: function(a) {
-                0 == a.flag && a.limitInfo && t.setData({
-                    "formDataGroup.patient.patientLimit": a.limitInfo
-                });
-            }
-        });
+        // a.requestH5api({
+        //     url: "/patient/getlimitinfo.json",
+        //     success: function(a) {
+        //         0 == a.flag && a.limitInfo && t.setData({
+        //             "formDataGroup.patient.patientLimit": a.limitInfo
+        //         });
+        //     }
+        // });
     },
     editPatientRequest: function(t) {
         var e = this;
-        a.requestH5api({
-            url: "/patient/update.json",
-            data: t,
-            success: function(a) {
-                0 == a.flag ? (e.getPatientList(), e.getPatientLimit(), e.hideModal()) : wx.showToast({
-                    title: a.message,
-                    icon: "none",
-                    duration: 2e3
-                });
-            }
-        });
+        // a.requestH5api({
+        //     url: "/patient/update.json",
+        //     data: t,
+        //     success: function(a) {
+        //         0 == a.flag ? (e.getPatientList(), e.getPatientLimit(), e.hideModal()) : wx.showToast({
+        //             title: a.message,
+        //             icon: "none",
+        //             duration: 2e3
+        //         });
+        //     }
+        // });
     },
     addPatientRequest: function(t) {
         var e = this;
-        a.requestH5api({
-            url: "/patient/add.json",
-            data: t,
-            success: function(a) {
-                0 == a.flag ? (e.getPatientList(), e.getPatientLimit(), e.hideModal()) : wx.showToast({
-                    title: a.message,
-                    icon: "none",
-                    duration: 2e3
-                });
-            }
-        });
+        // a.requestH5api({
+        //     url: "/patient/add.json",
+        //     data: t,
+        //     success: function(a) {
+        //         0 == a.flag ? (e.getPatientList(), e.getPatientLimit(), e.hideModal()) : wx.showToast({
+        //             title: a.message,
+        //             icon: "none",
+        //             duration: 2e3
+        //         });
+        //     }
+        // });
     },
     getSchedule: function(t) {
         var e = this;
-        wx.showLoading({
-            title: "加载中",
-            mask: !0
-        }), a.requestH5api({
-            url: "/order/orderconfig/getconfig.json",
-            data: {
-                shiftCaseId: e.data.formData.shiftCaseId
-            },
-            success: function(a) {
-                if (wx.hideLoading(), 0 == a.flag) {
-                    e.data.formData.hospitalId = a.hospitalId, a.requiredConfigs && 0 != a.requiredConfigs.length ? (e.data.formData.visitType = a.requiredConfigs[0].visitTypeId, 
-                    e.data.formData.visitTypeName = a.requiredConfigs[0].visitTypeName, e.setData({
-                        formData: e.data.formData
-                    }), 1 == a.requiredConfigs.length && e.setData({
-                        noSelectVisit: !0
-                    })) : a.requiredConfigs = [ {}, {} ];
-                    for (var t = a.requiredConfigs[0].requireEntrys || [], i = 0; i < t.length; i++) t[i].require && t[i].validator && (e.data.validator[t[i].name] = t[i].validator);
-                    for (var s = a.timeSections, i = 0; i < s.length; i++) if (s[i].avaliable) {
-                        e.setData({
-                            "formData.timeSection": s[i].timeSection,
-                            "formData.timeSectionId": s[i].timeId
-                        });
-                        break;
-                    }
-                    e.setData({
-                        orderInfo: a,
-                        "formDataGroup.time.timeList": a.timeSections,
-                        requiredConfigs: a.requiredConfigs,
-                        requireEntrys: t
-                    }), e.getPatientList(), e.getPayType();
-                } else wx.showToast({
-                    title: a.message,
-                    icon: "none",
-                    duration: 2e3
-                });
-            },
-            fail: function() {
-                wx.hideLoading();
-            }
-        });
+        console.info("11111111");
+        // wx.showLoading({
+        //     title: "加载中",
+        //     mask: !0
+        // }), a.requestH5api({
+        //     url: "/order/orderconfig/getconfig.json",
+        //     data: {
+        //         shiftCaseId: e.data.formData.shiftCaseId
+        //     },
+        //     success: function(a) {
+        //         if (wx.hideLoading(), 0 == a.flag) {
+        //             e.data.formData.hospitalId = a.hospitalId, a.requiredConfigs && 0 != a.requiredConfigs.length ? (e.data.formData.visitType = a.requiredConfigs[0].visitTypeId, 
+        //             e.data.formData.visitTypeName = a.requiredConfigs[0].visitTypeName, e.setData({
+        //                 formData: e.data.formData
+        //             }), 1 == a.requiredConfigs.length && e.setData({
+        //                 noSelectVisit: !0
+        //             })) : a.requiredConfigs = [ {}, {} ];
+        //             for (var t = a.requiredConfigs[0].requireEntrys || [], i = 0; i < t.length; i++) t[i].require && t[i].validator && (e.data.validator[t[i].name] = t[i].validator);
+        //             for (var s = a.timeSections, i = 0; i < s.length; i++) if (s[i].avaliable) {
+        //                 e.setData({
+        //                     "formData.timeSection": s[i].timeSection,
+        //                     "formData.timeSectionId": s[i].timeId
+        //                 });
+        //                 break;
+        //             }
+        //             e.setData({
+        //                 orderInfo: a,
+        //                 "formDataGroup.time.timeList": a.timeSections,
+        //                 requiredConfigs: a.requiredConfigs,
+        //                 requireEntrys: t
+        //             }), e.getPatientList(), e.getPayType();
+        //         } else wx.showToast({
+        //             title: a.message,
+        //             icon: "none",
+        //             duration: 2e3
+        //         });
+        //     },
+        //     fail: function() {
+        //         wx.hideLoading();
+        //     }
+        // });
     },
     getValidCode: function(t) {
         var e = this;
-        e.resendTime > 0 ? t && t() : (e.countDown(), a.requestH5api({
-            url: "/order/ordermsg/getcheckcode.json",
-            data: {
-                extend: e.data.formData.hospitalId + "_" + e.data.formData.shiftCaseId,
-                patientId: e.data.formData.patientId
-            },
-            success: function(a) {
-                0 == a.flag ? t && t() : wx.showToast({
-                    title: a.message,
-                    icon: "none",
-                    duration: 2e3
-                });
-            }
-        }));
+        // e.resendTime > 0 ? t && t() : (e.countDown(), a.requestH5api({
+        //     url: "/order/ordermsg/getcheckcode.json",
+        //     data: {
+        //         extend: e.data.formData.hospitalId + "_" + e.data.formData.shiftCaseId,
+        //         patientId: e.data.formData.patientId
+        //     },
+        //     success: function(a) {
+        //         0 == a.flag ? t && t() : wx.showToast({
+        //             title: a.message,
+        //             icon: "none",
+        //             duration: 2e3
+        //         });
+        //     }
+        // }));
     },
     orderformSubmitRequest: function() {
         var t = this;
         -1 == t.data.formData.diseaseId && (t.data.formData.diseaseId, t.data.formData.diseaseName);
         var e = t.data.formData;
-        e.formId = t.data.formId, e.orderDetailUrl = "pages/order-detail/order-detail?id=", 
-        wx.showLoading({
-            title: "加载中"
-        }), a.requestH5api({
-            url: "/order/submitorder/submit.json",
-            data: e,
-            success: function(a) {
-                console.log(a), delete t.data.formData.checkCode, t.setData({
-                    validCode: [],
-                    value: "",
-                    errorMessage: "",
-                    "invalid.hasError": !1
-                }), 0 == a.flag ? (t.setData({
-                    isFocus: !1
-                }), 1 == t.data.formData.payType ? wx.navigateTo({
-                    url: "/pages/order-pay/order-pay?id=" + a.orderNo
-                }) : wx.navigateTo({
-                    url: "/pages/order-detail/order-detail?id=" + a.orderNo
-                })) : 11 == a.flag ? (t.setData({
-                    isFocus: !1
-                }), wx.navigateTo({
-                    url: "/pages/order-result/order-result?orderState=3&message=" + a.message
-                })) : 1 == a.flag ? t.setData({
-                    errorMessage: a.message,
-                    "invalid.hasError": !0
-                }) : (t.setData({
-                    isFocus: !1
-                }), wx.navigateTo({
-                    url: "/pages/order-result/order-result?orderState=2&message=" + a.message
-                }));
-            },
-            complete: function() {
-                wx.hideLoading();
-            }
-        });
+        // e.formId = t.data.formId, e.orderDetailUrl = "pages/order-detail/order-detail?id=", 
+        // wx.showLoading({
+        //     title: "加载中"
+        // }), a.requestH5api({
+        //     url: "/order/submitorder/submit.json",
+        //     data: e,
+        //     success: function(a) {
+        //         console.log(a), delete t.data.formData.checkCode, t.setData({
+        //             validCode: [],
+        //             value: "",
+        //             errorMessage: "",
+        //             "invalid.hasError": !1
+        //         }), 0 == a.flag ? (t.setData({
+        //             isFocus: !1
+        //         }), 1 == t.data.formData.payType ? wx.navigateTo({
+        //             url: "/pages/order-pay/order-pay?id=" + a.orderNo
+        //         }) : wx.navigateTo({
+        //             url: "/pages/order-detail/order-detail?id=" + a.orderNo
+        //         })) : 11 == a.flag ? (t.setData({
+        //             isFocus: !1
+        //         }), wx.navigateTo({
+        //             url: "/pages/order-result/order-result?orderState=3&message=" + a.message
+        //         })) : 1 == a.flag ? t.setData({
+        //             errorMessage: a.message,
+        //             "invalid.hasError": !0
+        //         }) : (t.setData({
+        //             isFocus: !1
+        //         }), wx.navigateTo({
+        //             url: "/pages/order-result/order-result?orderState=2&message=" + a.message
+        //         }));
+        //     },
+        //     complete: function() {
+        //         wx.hideLoading();
+        //     }
+        // });
     },
     searchDisease: function(t) {
         var e = this;
-        e.data.searching || (e.data.searching = !0, a.requestH5api({
-            url: "/common/searchsuggest/list.json",
-            data: {
-                q: t.detail.value,
-                limit: 10,
-                type: "disease"
-            },
-            success: function(a) {
-                0 == a.flag && e.setData({
-                    diseaseList: a.items
-                });
-            },
-            complete: function() {
-                e.data.searching = !1;
-            }
-        }));
+        // e.data.searching || (e.data.searching = !0, a.requestH5api({
+        //     url: "/common/searchsuggest/list.json",
+        //     data: {
+        //         q: t.detail.value,
+        //         limit: 10,
+        //         type: "disease"
+        //     },
+        //     success: function(a) {
+        //         0 == a.flag && e.setData({
+        //             diseaseList: a.items
+        //         });
+        //     },
+        //     complete: function() {
+        //         e.data.searching = !1;
+        //     }
+        // }));
     },
     getPayType: function() {
         var t = this;
-        a.requestH5api({
-            url: "/pay/getpaytype.json",
-            data: {
-                shiftCaseId: t.data.formData.shiftCaseId,
-                hospitalId: t.data.formData.hospitalId
-            },
-            success: function(a) {
-                0 == a.flag && (t.setData({
-                    payType: a.payType
-                }), 0 == a.payType ? t.setData({
-                    "formData.payWay": "去医院支付",
-                    "formData.payType": "0"
-                }) : 1 == a.payType && t.setData({
-                    "formData.payWay": "线上支付",
-                    "formData.payType": "1"
-                }));
-            }
-        });
+        // a.requestH5api({
+        //     url: "/pay/getpaytype.json",
+        //     data: {
+        //         shiftCaseId: t.data.formData.shiftCaseId,
+        //         hospitalId: t.data.formData.hospitalId
+        //     },
+        //     success: function(a) {
+        //         0 == a.flag && (t.setData({
+        //             payType: a.payType
+        //         }), 0 == a.payType ? t.setData({
+        //             "formData.payWay": "去医院支付",
+        //             "formData.payType": "0"
+        //         }) : 1 == a.payType && t.setData({
+        //             "formData.payWay": "线上支付",
+        //             "formData.payType": "1"
+        //         }));
+        //     }
+        // });
     },
     orderformSubmit: function(a) {
         var t = this;
@@ -502,7 +503,9 @@ Page({
         }
     },
     onLoad: function(a) {
-        this.data.formData.shiftCaseId = a.shiftCaseId, this.getPatientLimit(), this.getSchedule();
+        this.data.formData.shiftCaseId = a.shiftCaseId,
+         this.getPatientLimit(), 
+         this.getSchedule();
     },
     onReady: function() {},
     onShow: function() {},
